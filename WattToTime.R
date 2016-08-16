@@ -10,7 +10,6 @@ data$Date <- as.POSIXct(data$Date)
 # Extract the data from column name to plot
 data.toPlot <- data[data$Battery > 18 & data$Battery < 85,]
 
-
 # Calculate the difference of each time point to the first (in seconds)
 data.toPlot$TimeDiff <- data.toPlot$Date - data.toPlot$Date[1]
 
@@ -20,9 +19,12 @@ data.toPlot$TimeDiffValue <- as.numeric(data.toPlot$TimeDiff)
 # Multiple current and voltage to get Power
 data.toPlot$Power <- as.double(-(data.toPlot$Current/1000) * data.toPlot$Voltage/1000)
 
-data.toPlotFinal <- aggregate(data.toPlot$Power, by=list(Battery=data.toPlot$Battery), FUN=sum)
+ppi <- 200
+png(file=paste("highSpeedMean", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
 
-plot(x=data.toPlotFinal$Battery, xlim=c(100, 0), y=data.toPlotFinal$x, type="l", xlab="Battery(%)", ylab="Power in Watts per percentage", lty=1, col="Black", lwd=3)
-abline(lm(data.toPlotFinal$x ~ data.toPlotFinal$Battery), col="red")
+plot(x=data.toPlot$TimeDiffValue, y=data.toPlot$Power, type="l", xlab="Time in Seconds", ylab="Watts", lty=1, col="Black", lwd=3)
+abline(a = mean(data.toPlot$Power), b= 0, col="red")
+legend("topright", legend=c("Mean Watt = 155.16"), pch=1, lty=1, lwd=3)
 
-#dev.off()
+#lm(data.toPlot$Power ~ data.toPlot$TimeDiffValue)
+dev.off()
