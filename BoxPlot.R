@@ -36,6 +36,7 @@ data.toPlotFinal <- data.toPlot[(data.toPlot$Velocity > 2.97 & data.toPlot$Veloc
                                   (data.toPlot$Velocity > 12.87 & data.toPlot$Velocity < 13.13) |
                                   (data.toPlot$Velocity > 13.86 & data.toPlot$Velocity < 14.14),]
 
+write.csv(data.toPlotFinal, file="toPlotFinal")
 ppi <- 200
 png(file=paste("FinalBoxPlot", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
 
