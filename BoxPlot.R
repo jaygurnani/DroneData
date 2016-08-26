@@ -6,19 +6,35 @@ data3 <- read.csv(file="3.csv", header=TRUE, sep=",")
 data4 <- read.csv(file="4.csv", header=TRUE, sep=",")
 data5 <- read.csv(file="5.csv", header=TRUE, sep=",")
 data6 <- read.csv(file="6.csv", header=TRUE, sep=",")
+data7 <- read.csv(file="7.csv", header=TRUE, sep=",")
+data8 <- read.csv(file="8.csv", header=TRUE, sep=",")
+data9 <- read.csv(file="9.csv", header=TRUE, sep=",")
+data10 <- read.csv(file="10.csv", header=TRUE, sep=",")
+data11 <- read.csv(file="11.csv", header=TRUE, sep=",")
+data12 <- read.csv(file="12.csv", header=TRUE, sep=",")
+data13 <- read.csv(file="13.csv", header=TRUE, sep=",")
+data14 <- read.csv(file="14.csv", header=TRUE, sep=",")
 
 # Extract the data from column name to plot
-data.toPlot <- rbind(data3, data4, data5, data6)
+data.toPlot <- rbind(data3, data4, data5, data6, data7, data8, data9, data10, data11, data12, data13, data14)
 
 # Multiple current and voltage to get Power
 data.toPlot$Power <- as.double(-(data.toPlot$Current/1000) * data.toPlot$Voltage/1000)
 #Get Mangnitude of Velocity
 data.toPlot$Velocity <- sqrt(data.toPlot$VelocityX^2 + data.toPlot$VelocityY^2 + data.toPlot$VelocityZ^2)
 
-data.toPlotFinal <- data.toPlot[(data.toPlot$Velocity > 2.85 & data.toPlot$Velocity < 3.15) | 
-                                  (data.toPlot$Velocity > 3.80 & data.toPlot$Velocity < 4.20) |
-                                  (data.toPlot$Velocity > 4.75 & data.toPlot$Velocity < 5.25) |
-                                  (data.toPlot$Velocity > 5.70 & data.toPlot$Velocity < 6.30),]
+data.toPlotFinal <- data.toPlot[(data.toPlot$Velocity > 2.97 & data.toPlot$Velocity < 3.03) | 
+                                  (data.toPlot$Velocity > 3.96 & data.toPlot$Velocity < 4.04) |
+                                  (data.toPlot$Velocity > 4.95 & data.toPlot$Velocity < 5.05) |
+                                  (data.toPlot$Velocity > 5.94 & data.toPlot$Velocity < 6.06) |
+                                  (data.toPlot$Velocity > 6.93 & data.toPlot$Velocity < 7.07) |
+                                  (data.toPlot$Velocity > 7.92 & data.toPlot$Velocity < 8.08) |
+                                  (data.toPlot$Velocity > 8.91 & data.toPlot$Velocity < 9.09) |
+                                  (data.toPlot$Velocity > 9.90 & data.toPlot$Velocity < 10.10) |
+                                  (data.toPlot$Velocity > 10.89 & data.toPlot$Velocity < 11.11) |
+                                  (data.toPlot$Velocity > 11.88 & data.toPlot$Velocity < 12.12) |
+                                  (data.toPlot$Velocity > 12.87 & data.toPlot$Velocity < 13.13) |
+                                  (data.toPlot$Velocity > 13.86 & data.toPlot$Velocity < 14.14),]
 
 ppi <- 200
 png(file=paste("FinalBoxPlot", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
