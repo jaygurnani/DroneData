@@ -2,13 +2,13 @@
 setwd("/Users/mac/Desktop/Programming/COMP9596//DroneData")
 
 # Read the data
-data <- read.csv(file="10.csv", header=TRUE, sep=",")
+data <- read.csv(file="14.csv", header=TRUE, sep=",")
 
 # Convert date column to Date object
 data$Date <- as.POSIXct(data$Date)
 
 # Extract the data from column name to plot
-data.toPlot <- data[data$Battery > 18 & data$Battery < 81,]
+data.toPlot <- data[data$Battery > 18,]
 
 # Calculate the difference of each time point to the first (in seconds)
 data.toPlot$TimeDiff <- data.toPlot$Date - data.toPlot$Date[1]
@@ -24,7 +24,7 @@ data.toPlot$Velocity <- sqrt(data.toPlot$VelocityX^2 + data.toPlot$VelocityY^2 +
 data.toPlotFinal <- data.toPlot[with(data.toPlot, order(Velocity)), ]
 
 ppi <- 200
-png(file=paste("10", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
+png(file=paste("14", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
 
 plot(y=data.toPlot$Power, x=data.toPlot$Velocity, type="p", ylab="Power in Watts", xlab="Magnitude of Velocity (m/s)", lty=1, col="Black", lwd=1)
 abline(lm(data.toPlot$Power ~ data.toPlot$Velocity), col="red")
