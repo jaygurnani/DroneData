@@ -2,13 +2,13 @@
 setwd("/Users/mac/Desktop/Programming/COMP9596//DroneData")
 
 # Read the data
-data <- read.csv(file="Aug17th.csv", header=TRUE, sep=",")
+data <- read.csv(file="14.csv", header=TRUE, sep=",")
 
 # Convert date column to Date object
 data$Date <- as.POSIXct(data$Date)
 
 # Extract the data from column name to plot
-data.toPlot <- data[data$Battery > 18 & data$Battery < 82,]
+data.toPlot <- data[data$Battery > 18,]
 
 # Calculate the difference of each time point to the first (in seconds)
 data.toPlot$TimeDiff <- data.toPlot$Date - data.toPlot$Date[1]
@@ -20,11 +20,11 @@ data.toPlot$TimeDiffValue <- as.numeric(data.toPlot$TimeDiff)
 data.toPlot$Power <- as.double(-(data.toPlot$Current/1000) * data.toPlot$Voltage/1000)
 
 ppi <- 200
-png(file=paste("SlowSpeedMean", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
+png(file=paste("14Power", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
 
-plot(x=data.toPlot$TimeDiffValue, y=data.toPlot$Power, type="l", xlab="Time in Seconds", ylab="Watts", lty=1, col="Black", lwd=3)
-abline(a = mean(data.toPlot$Power), b= 0, col="red")
-legend("topright", legend=c("Mean Watts = 154.5845"), pch=1, lty=1, lwd=3)
+plot(x=data.toPlot$TimeDiffValue, y=data.toPlot$Power, type="l", xlab="Time in Seconds", ylab="Watts", lty=1, col="Black")
+#abline(a = mean(data.toPlot$Power), b= 0, col="red")
+#legend("topright", legend=c("Mean Watts = 154.5845"), pch=1, lty=1, lwd=3)
 
 #lm(data.toPlot$Power ~ data.toPlot$TimeDiffValue)
 dev.off()
