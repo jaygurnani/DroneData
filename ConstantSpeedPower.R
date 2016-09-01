@@ -92,7 +92,7 @@ data10.toPlot$TimeDiff <- data10.toPlot$Date - data10.toPlot$Date[1]
 data10.toPlot$TimeDiffValue <- as.numeric(data10.toPlot$TimeDiff)
 data10.toPlot$Power <- as.double(-(data10.toPlot$Current/1000) * data10.toPlot$Voltage/1000)
 data10.toPlot$Velocity <- sqrt(data10.toPlot$VelocityX^2 + data10.toPlot$VelocityY^2 + data10.toPlot$VelocityZ^2)
-data10.toPlotFinal <- data10.toPlot[data10.toPlot$TimeDiffValue > 22 & data10.toPlot$TimeDiffValue < 40,]
+data10.toPlotFinal <- data10.toPlot[data10.toPlot$TimeDiffValue > 73 & data10.toPlot$TimeDiffValue < 85,]
 data10.toPlotFinal$Mean <- mean(data10.toPlotFinal$Power)
 
 #11
@@ -102,7 +102,7 @@ data11.toPlot$TimeDiff <- data11.toPlot$Date - data11.toPlot$Date[1]
 data11.toPlot$TimeDiffValue <- as.numeric(data11.toPlot$TimeDiff)
 data11.toPlot$Power <- as.double(-(data11.toPlot$Current/1000) * data11.toPlot$Voltage/1000)
 data11.toPlot$Velocity <- sqrt(data11.toPlot$VelocityX^2 + data11.toPlot$VelocityY^2 + data11.toPlot$VelocityZ^2)
-data11.toPlotFinal <- data11.toPlot[data11.toPlot$TimeDiffValue > 24 & data11.toPlot$TimeDiffValue < 40,]
+data11.toPlotFinal <- data11.toPlot[data11.toPlot$TimeDiffValue > 23 & data11.toPlot$TimeDiffValue < 38,]
 data11.toPlotFinal$Mean <- mean(data11.toPlotFinal$Power)
 
 #12
@@ -112,7 +112,7 @@ data12.toPlot$TimeDiff <- data12.toPlot$Date - data12.toPlot$Date[1]
 data12.toPlot$TimeDiffValue <- as.numeric(data12.toPlot$TimeDiff)
 data12.toPlot$Power <- as.double(-(data12.toPlot$Current/1000) * data12.toPlot$Voltage/1000)
 data12.toPlot$Velocity <- sqrt(data12.toPlot$VelocityX^2 + data12.toPlot$VelocityY^2 + data12.toPlot$VelocityZ^2)
-data12.toPlotFinal <- data12.toPlot[data12.toPlot$TimeDiffValue > 27 & data12.toPlot$TimeDiffValue < 39,]
+data12.toPlotFinal <- data12.toPlot[data12.toPlot$TimeDiffValue > 24 & data12.toPlot$TimeDiffValue < 35,]
 data12.toPlotFinal$Mean <- mean(data12.toPlotFinal$Power)
 
 #13
@@ -122,7 +122,7 @@ data13.toPlot$TimeDiff <- data13.toPlot$Date - data13.toPlot$Date[1]
 data13.toPlot$TimeDiffValue <- as.numeric(data13.toPlot$TimeDiff)
 data13.toPlot$Power <- as.double(-(data13.toPlot$Current/1000) * data13.toPlot$Voltage/1000)
 data13.toPlot$Velocity <- sqrt(data13.toPlot$VelocityX^2 + data13.toPlot$VelocityY^2 + data13.toPlot$VelocityZ^2)
-data13.toPlotFinal <- data13.toPlot[data13.toPlot$TimeDiffValue > 28 & data13.toPlot$TimeDiffValue < 33,]
+data13.toPlotFinal <- data13.toPlot[data13.toPlot$TimeDiffValue > 28 & data13.toPlot$TimeDiffValue < 35,]
 data13.toPlotFinal$Mean <- mean(data13.toPlotFinal$Power)
 
 #14
@@ -132,18 +132,18 @@ data14.toPlot$TimeDiff <- data14.toPlot$Date - data14.toPlot$Date[1]
 data14.toPlot$TimeDiffValue <- as.numeric(data14.toPlot$TimeDiff)
 data14.toPlot$Power <- as.double(-(data14.toPlot$Current/1000) * data14.toPlot$Voltage/1000)
 data14.toPlot$Velocity <- sqrt(data14.toPlot$VelocityX^2 + data14.toPlot$VelocityY^2 + data14.toPlot$VelocityZ^2)
-data14.toPlotFinal <- data14.toPlot[data14.toPlot$TimeDiffValue > 31 & data14.toPlot$TimeDiffValue < 34,]
+data14.toPlotFinal <- data14.toPlot[data14.toPlot$TimeDiffValue > 55 & data14.toPlot$TimeDiffValue < 64,]
 data14.toPlotFinal$Mean <- mean(data14.toPlotFinal$Power)
 
 data.toPlot <- rbind(data3.toPlotFinal, data4.toPlotFinal, data5.toPlotFinal, data6.toPlotFinal, data7.toPlotFinal, data8.toPlotFinal, data9.toPlotFinal, data10.toPlotFinal, data11.toPlotFinal, data12.toPlotFinal, data13.toPlotFinal, data14.toPlotFinal)
 
-ppi <- 200
-png(file=paste("ConstandSpeedEnergy", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
+#ppi <- 200
+#png(file=paste("ConstandSpeedEnergy", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
 
-plot(y=data.toPlot$Mean, x=data.toPlot$VelocitySolid,type="p",col="black", lwd="1", xlab="Target Velocity (m/s)", ylab="Energy (Watts/s)", main="Energy consumed flying straight at constant speeds")
+plot(y=data.toPlot$Mean, x=data.toPlot$VelocitySolid,type="l",col="black", lwd="1", xlab="Target Velocity (m/s)", ylab="Energy (Watts/s)", main="Energy consumed flying straight at constant speeds")
 fit <- lm(data.toPlot$Mean ~ poly(data.toPlot$VelocitySolid, 4, raw=TRUE))
 points(data.toPlot$VelocitySolid, predict(fit), type="l", col="red", lwd=2)
 #summary(fit)
 
-dev.off()
+#dev.off()
 
