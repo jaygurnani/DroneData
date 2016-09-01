@@ -2,6 +2,7 @@
 setwd("/Users/mac/Desktop/Programming/COMP9596//DroneData")
 
 # Read the data
+data0 <- read.csv(file="0.csv", header=TRUE, sep=",")
 data3 <- read.csv(file="3.csv", header=TRUE, sep=",")
 data4 <- read.csv(file="4.csv", header=TRUE, sep=",")
 data5 <- read.csv(file="5.csv", header=TRUE, sep=",")
@@ -149,10 +150,7 @@ data14.toPlotFinal$Mean <- mean(data14.toPlotFinal$Power)
 data.toPlot <- rbind(data3.toPlotFinal, data4.toPlotFinal, data5.toPlotFinal, data6.toPlotFinal, data7.toPlotFinal, data8.toPlotFinal, data9.toPlotFinal, data10.toPlotFinal, data11.toPlotFinal, data12.toPlotFinal, data13.toPlotFinal, data14.toPlotFinal)
 
 
-#write.csv(data.toPlotFinal, file="toPlotFinal")
-#ppi <- 200
-#png(file=paste("FinalBoxPlot", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
-
-#Final
-boxplot(data.toPlot$Mean~data.toPlot$VelocitySolid,data=data.toPlot, main="Power vs Speed Box Plot test", xlab="Velocity (m/s)", ylab="Power in Watts")
-
+plot(y=data.toPlot$Power, x=data.toPlot$Velocity,type="p",col="black", lwd="1", xlab="Target Velocity (m/s)", ylab="Energy (Watts/s)", main="Energy consumed flying straight at constant speeds")
+fit <- lm(data.toPlot$Power ~ poly(data.toPlot$Velocity, 4, raw=TRUE))
+points(data.toPlot$Velocity, predict(fit), type="l", col="red", lwd=2)
+#summary(fit)
