@@ -2,7 +2,7 @@
 setwd("/Users/mac/Desktop/Programming/COMP9596//DroneData")
 
 # Read the data
-data <- read.csv(file="3.csv", header=TRUE, sep=",")
+data <- read.csv(file="14.csv", header=TRUE, sep=",")
 
 # Convert date column to Date object
 data$Date <- as.POSIXct(data$Date)
@@ -26,11 +26,11 @@ data.toPlot$Velocity <- sqrt(data.toPlot$VelocityX^2 + data.toPlot$VelocityY^2 +
 data.toPlot <- data.toPlot[data.toPlot$TimeDiffValue > 19 & data.toPlot$TimeDiffValue < 27,]
 
 ppi <- 200
-png(file=paste("3AcclerationSpeed", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
+png(file=paste("14AcclerationSpeed", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
 plot(y=data.toPlot$Velocity, x=data.toPlot$TimeDiffValue,type="l",col="black", lwd="1", xlab="Time (seconds)", ylab="Speed (m/s)")
 dev.off()
 
-png(file=paste("3AcclerationPower", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
+png(file=paste("14AcclerationPower", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
 plot(y=data.toPlot$Power, x=data.toPlot$TimeDiffValue,type="l",col="black", lwd="1", xlab="Time (seconds)", ylab="Power (Watts)")
 
 dev.off()

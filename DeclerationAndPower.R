@@ -28,12 +28,12 @@ data.toPlot <- data.toPlot[data.toPlot$TimeDiffValue > 33 & data.toPlot$TimeDiff
 ppi <- 200
 png(file=paste("14DeclerationSpeed", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
 plot(y=data.toPlot$Velocity, x=data.toPlot$TimeDiffValue,type="l",col="black", lwd="1", xlab="Time (seconds)", ylab="Speed (m/s)")
-dev.off()
+#dev.off()
 
 png(file=paste("14DeclerationPower", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
 plot(y=data.toPlot$Power, x=data.toPlot$TimeDiffValue,type="l",col="black", lwd="1", xlab="Time (seconds)", ylab="Power (Watts)")
-fit <- lm(data.toPlot$Power ~ poly(data.toPlot$TimeDiffValue, 5, raw=TRUE))
-points(data.toPlot$TimeDiffValue, predict(fit), type="l", col="red", lwd=2)
-summary(fit)
-dev.off()
+#fit <- lm(data.toPlot$Power ~ poly(data.toPlot$TimeDiffValue, 5, raw=TRUE))
+#points(data.toPlot$TimeDiffValue, predict(fit), type="l", col="red", lwd=2)
+#summary(fit)
+#dev.off()
 

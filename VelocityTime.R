@@ -2,7 +2,7 @@
 setwd("/Users/mac/Desktop/Programming/COMP9596//DroneData")
 
 # Read the data
-data <- read.csv(file="14.csv", header=TRUE, sep=",")
+data <- read.csv(file="circle.csv", header=TRUE, sep=",")
 
 # Convert date column to Date object
 data$Date <- as.POSIXct(data$Date)
@@ -21,13 +21,14 @@ data.toPlot$Power <- as.double(-(data.toPlot$Current/1000) * data.toPlot$Voltage
 
 #Get Mangnitude of Velocity
 data.toPlot$Velocity <- sqrt(data.toPlot$VelocityX^2 + data.toPlot$VelocityY^2 + data.toPlot$VelocityZ^2)
-data.toPlotFinal <- data.toPlot[with(data.toPlot, order(Velocity)), ]
+data.toPlot <- data.toPlot[data.toPlot$TimeDiffValue < 15 ,]
+#data.toPlotFinal <- data.toPlot[with(data.toPlot, order(Velocity)), ]
 
-ppi <- 200
-png(file=paste("14Velocity", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
+#ppi <- 200
+#png(file=paste("14Velocity", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
 
-plot(y=data.toPlot$Velocity, x=data.toPlot$TimeDiffValue, type="l", ylab="Velocity (m/s)", xlab="Time (seconds)", lty=1, col="Black", lwd=1)
+plot(y=data.toPlot$Power, x=data.toPlot$TimeDiffValue, type="l", ylab="Velocity (m/s)", xlab="Time (seconds)", lty=1, col="Black", lwd=1)
 #abline(lm(data.toPlot$Power ~ data.toPlot$Velocity), col="red")
 #legend("topright", legend=c("Mean Watts = 154.5845"), pch=1, lty=1, lwd=3)
 
-dev.off()
+#dev.off()

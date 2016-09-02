@@ -149,8 +149,12 @@ data14.toPlotFinal$Mean <- mean(data14.toPlotFinal$Power)
 # Extract the data from column name to plot
 data.toPlot <- rbind(data3.toPlotFinal, data4.toPlotFinal, data5.toPlotFinal, data6.toPlotFinal, data7.toPlotFinal, data8.toPlotFinal, data9.toPlotFinal, data10.toPlotFinal, data11.toPlotFinal, data12.toPlotFinal, data13.toPlotFinal, data14.toPlotFinal)
 
+ppi <- 200
+png(file=paste("ConstandSpeedEnergy2", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
 
-plot(y=data.toPlot$Power, x=data.toPlot$Velocity,type="p",col="black", lwd="1", xlab="Target Velocity (m/s)", ylab="Energy (Watts/s)", main="Energy consumed flying straight at constant speeds")
+plot(y=data.toPlotFinal$Power, x=data.toPlotFinal$Velocity,type="p",col="black", lwd="1", xlab="Target Velocity (m/s)", ylab="Energy (Watts/s)", main="Energy consumed flying straight at constant speeds")
 fit <- lm(data.toPlot$Power ~ poly(data.toPlot$Velocity, 4, raw=TRUE))
 points(data.toPlot$Velocity, predict(fit), type="l", col="red", lwd=2)
 #summary(fit)
+
+

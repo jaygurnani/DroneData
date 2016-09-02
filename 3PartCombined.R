@@ -146,15 +146,24 @@ data14.toPlot$Velocity <- sqrt(data14.toPlot$VelocityX^2 + data14.toPlot$Velocit
 data14.toPlotFinal <- data14.toPlot[data14.toPlot$Velocity > 13.86 & data14.toPlot$Velocity < 14.14,]
 data14.toPlotFinal$Mean <- mean(data14.toPlotFinal$Power)
 
-# Extract the data from column name to plot
-data.toPlot <- rbind(data0.toPlotFinal, data3.toPlotFinal, data4.toPlotFinal, data5.toPlotFinal, data6.toPlotFinal, data7.toPlotFinal, data8.toPlotFinal, data9.toPlotFinal, data10.toPlotFinal, data11.toPlotFinal, data12.toPlotFinal, data13.toPlotFinal, data14.toPlotFinal)
+
+data.toPlot <- rbind(data3.toPlotFinal, data4.toPlotFinal, data5.toPlotFinal, data6.toPlotFinal, data7.toPlotFinal, data8.toPlotFinal, data9.toPlotFinal, data10.toPlotFinal, data11.toPlotFinal, data12.toPlotFinal, data13.toPlotFinal, data14.toPlotFinal)
+fitConstant <- lm(data.toPlot$Power ~ poly(data.toPlot$Velocity, 4, raw=TRUE))
+contantFunction <-  function(x) fitConstant$coefficients[5]*x^4 + fitConstant$coefficient[4]*x^3 + fitConstant$coefficient[3]*x^2 + fitConstant$coefficient[2]*x + fitConstant$coefficient[1]
+#summary(fitConstant)
+
+dataAccl.toPlot <- data14.toPlot[data14.toPlot$TimeDiffValue > 19 & data14.toPlot$TimeDiffValue < 27,]
+dataAccl.toPlot$TimeDiff = dataAccl.toPlot$Date - dataAccl.toPlot$Date[1]
+dataAccl.toPlot$TimeDiffValue = as.numeric(dataAccl.toPlot$TimeDiff)
+fitAccl <- lm(dataAccl.toPlot$Power ~ poly(dataAccl.toPlot$TimeDiffValue, 3, raw=TRUE))
+acclFunction <- function(x) fitAccl$coefficient[4]*x^3 + fitAccl$coefficient[3]*x^2 + fitAccl$coefficient[2]*x + fitAccl$coefficient[1]
+#summary(fitAccl)
+
+dataDccl.toPlot <- data14.toPlot[data14.toPlot$TimeDiffValue > 33 & data14.toPlot$TimeDiffValue < 42,]
+dataDccl.toPlot$TimeDiff = dataDccl.toPlot$Date - dataDccl.toPlot$Date[1]
+dataDccl.toPlot$TimeDiffValue = as.numeric(dataDccl.toPlot$TimeDiff)
+fitDccl <- lm(dataDccl.toPlot$Power ~ poly(dataDccl.toPlot$TimeDiffValue, 3, raw=TRUE))
+dcclFunction <- function(x) fitDccl$coefficient[4]*x^3 + fitDccl$coefficient[3]*x^2 + fitDccl$coefficient[2]*x + fitDccl$coefficient[1]
+#summary(fitDccl)
 
 
-#write.csv(data.toPlotFinal, file="toPlotFinal")
-ppi <- 200
-png(file=paste("FinalBoxPlot", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
-
-#Final
-boxplot(data.toPlot$Power~data.toPlot$VelocitySolid,data=data.toPlot, main="Power vs Speed Box Plot test", xlab="Velocity (m/s)", ylab="Power in Watts")
-
-dev.off()
