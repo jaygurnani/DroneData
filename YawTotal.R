@@ -2,14 +2,14 @@
 setwd("/Users/mac/Desktop/Programming/COMP9596//DroneData")
 
 # Read the data
-data0 <- read.csv(file="3rdYaw10.csv", header=TRUE, sep=",")
-data3 <- read.csv(file="3rdYaw20.csv", header=TRUE, sep=",")
-data4 <- read.csv(file="3rdYaw30.csv", header=TRUE, sep=",")
-data5 <- read.csv(file="3rdYaw40.csv", header=TRUE, sep=",")
-data6 <- read.csv(file="3rdYaw50.csv", header=TRUE, sep=",")
-data7 <- read.csv(file="3rdYaw60.csv", header=TRUE, sep=",")
-data8 <- read.csv(file="3rdYaw70.csv", header=TRUE, sep=",")
-data9 <- read.csv(file="3rdYaw80.csv", header=TRUE, sep=",")
+data0 <- read.csv(file="yawFinal10.csv", header=TRUE, sep=",")
+data3 <- read.csv(file="yawFinal20.csv", header=TRUE, sep=",")
+data4 <- read.csv(file="yawFinal30.csv", header=TRUE, sep=",")
+data5 <- read.csv(file="yawFinal40.csv", header=TRUE, sep=",")
+data6 <- read.csv(file="yawFinal50.csv", header=TRUE, sep=",")
+data7 <- read.csv(file="yawFinal60.csv", header=TRUE, sep=",")
+data8 <- read.csv(file="yawFinal70.csv", header=TRUE, sep=",")
+data9 <- read.csv(file="yawFinal80.csv", header=TRUE, sep=",")
 
 
 #0
@@ -86,7 +86,7 @@ data9.toPlot$Mean <- mean(data9.toPlot$Power)
 
 
 # Extract the data from column name to plot
-data.toPlot <- rbind(data0.toPlot, data3.toPlot, data4.toPlot, data5.toPlot, data6.toPlot, data7.toPlot, data8.toPlot)
+data.toPlot <- rbind(data0.toPlot, data3.toPlot, data4.toPlot, data5.toPlot, data6.toPlot, data7.toPlot, data8.toPlot, data9.toPlot)
 
 
 #write.csv(data.toPlotFinal, file="toPlotFinal")
@@ -95,7 +95,7 @@ png(file=paste("AngularVelocityMean", ".png", sep=""), height=7*ppi, width=9*ppi
 
 #Final
 plot(data.toPlot$Mean~ data.toPlot$AngularVelocity, data=data.toPlot, main="Mean Power vs Angular Velocity", xlab="Angular Velocity", ylab="Power in Watts", ylim= c(135, 185))
-fit <- lm(data.toPlot$Mean ~ poly(data.toPlot$AngularVelocity, 4, raw=TRUE))
+fit <- lm(data.toPlot$Mean ~ poly(data.toPlot$AngularVelocity, 1, raw=TRUE))
 points(data.toPlot$AngularVelocity, predict(fit), type="l", col="red", lwd=2)
 dev.off()
 
