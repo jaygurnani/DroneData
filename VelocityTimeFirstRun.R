@@ -1,6 +1,7 @@
 # Set the working directory
 setwd("/Users/mac/Desktop/Programming/COMP9596//DroneData")
 require(splines) #thx @Chase for the notice
+library(geosphere)
 
 # Read the data
 data <- read.csv(file="firstRun.csv", header=TRUE, sep=",")
@@ -17,12 +18,15 @@ data.toPlot$TimeDiff <- data.toPlot$Date - data.toPlot$Date[1]
 # Since TimeDiff is a time/date object, convert it to a numeric and store this as an extra column in data frame
 data.toPlot$TimeDiffValue <- as.numeric(data.toPlot$TimeDiff)
 
+
 # Multiple current and voltage to get Power
 data.toPlot$Power <- as.double(-(data.toPlot$Current/1000) * data.toPlot$Voltage/1000)
 
 #Get Mangnitude of Velocity
 data.toPlot$Velocity <- sqrt(data.toPlot$VelocityX^2 + data.toPlot$VelocityY^2 + data.toPlot$VelocityZ^2)
 data.toPlot$Mean <- mean(data.toPlot$Power)
+
+
 
 #dY <- diff(data.toPlot$Velocity)/diff(data.toPlot$TimeDiffValue)  # the derivative of your function
 #dX <- rowMeans(embed(data.toPlot$TimeDiffValue,2)) # centers the X values for plotting
@@ -31,7 +35,7 @@ data.toPlot$Mean <- mean(data.toPlot$Power)
 #png(file=paste("FirstExperiment", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
 
 #write.csv(data.toPlotFinal, file="FirstRev.csv")
-plot(y=data.toPlot$Velocity, x=data.toPlot$TimeDiffValue,type="l",col="black", lwd="1", ylab="Velocity (m/s)", xlab="Power (Watts)")
+plot(y=data.toPlot$Power, x=data.toPlot$TimeDiffValue,type="l",col="black", lwd="1", ylab="Speed (m/s)", xlab="Time in Seconds", main="Drone Recorded Speed")
 points(x=4.8299999, y=9.6104106, pch=1)
 points(x=6.81299996376038, y=9.6860727, pch=2)
 points(x=8.81, y=9.7025768, pch=3)
