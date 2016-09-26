@@ -4,7 +4,7 @@ require(splines) #thx @Chase for the notice
 library(geosphere)
 
 # Read the data
-data <- read.csv(file="firstRun.csv", header=TRUE, sep=",")
+data <- read.csv(file="1.csv", header=TRUE, sep=",")
 
 # Convert date column to Date object
 data$Date <- as.POSIXct(data$Date)
@@ -32,16 +32,16 @@ data.toPlot$Mean <- mean(data.toPlot$Power)
 #dX <- rowMeans(embed(data.toPlot$TimeDiffValue,2)) # centers the X values for plotting
 
 #ppi <- 200
-#png(file=paste("FirstExperiment", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
+#png(file=paste("FirstExperimentSingleAnglePower", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
 
 #write.csv(data.toPlotFinal, file="FirstRev.csv")
-plot(y=data.toPlot$Power, x=data.toPlot$TimeDiffValue,type="l",col="black", lwd="1", ylab="Speed (m/s)", xlab="Time in Seconds", main="Drone Recorded Speed")
-points(x=4.8299999, y=9.6104106, pch=1)
-points(x=6.81299996376038, y=9.6860727, pch=2)
-points(x=8.81, y=9.7025768, pch=3)
-points(x=10.819000005722, y=9.3520047, pch=4)
-points(x=12.8249998092651, y=9.6648853, pch=5) 
+plot(y=data.toPlot$Power, x=data.toPlot$TimeDiffValue,type="l",col="black", lwd="1", ylab="Power (in Watts)", xlab="Time in Seconds")
+points(x=7.00800013542175, y=data.toPlot$Power[70], pch=1)
+points(x=10.0150001049042, y=data.toPlot$Power[101], pch=2)
+points(x=13.0260000228882, y=data.toPlot$Power[131], pch=3)
+points(x=16.0360000133514, y=data.toPlot$Power[161], pch=4)
+points(x=19.058000087738, y=data.toPlot$Power[191], pch=5) 
 
-legend("topleft", legend=c("5 Degrees", "10 Degrees", "15 Degrees", "20 Degrees", "25 Degrees"), bty="n", pch=1:5, lty=1, lwd=1)
+legend("topleft", legend=c("1 Degrees", "2 Degrees", "3 Degrees", "4 Degrees", "5 Degrees"), bty="n", pch=1:5, lty=1, lwd=1)
 
 #dev.off()

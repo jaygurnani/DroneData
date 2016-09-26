@@ -13,10 +13,11 @@ data.toPlot <- data
 
 # Multiple current and voltage to get Power
 data.toPlot$Power <- as.double(-(data.toPlot$Current/1000) * data.toPlot$Voltage/1000)
+data.toPlot$Mean <- mean(data.toPlot$Power)
 
 
 ppi <- 200
-png(file=paste("height", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
+png(file=paste("Height", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
 
 plot(y=data.toPlot$Power, x=data.toPlot$Altitude, type="p", ylab="Power in Watts", xlab="Altitude in meters", lty=1, col="Black", lwd=1)
 

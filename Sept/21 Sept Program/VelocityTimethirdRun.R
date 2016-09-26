@@ -3,7 +3,7 @@ setwd("/Users/mac/Desktop/Programming/COMP9596//DroneData")
 require(splines) #thx @Chase for the notice
 
 # Read the data
-data <- read.csv(file="2.csv", header=TRUE, sep=",")
+data <- read.csv(file="thirdRun.csv", header=TRUE, sep=",")
 
 # Convert date column to Date object
 data$Date <- as.POSIXct(data$Date)
@@ -27,17 +27,17 @@ data.toPlot$Mean <- mean(data.toPlot$Power)
 #dY <- diff(data.toPlot$Velocity)/diff(data.toPlot$TimeDiffValue)  # the derivative of your function
 #dX <- rowMeans(embed(data.toPlot$TimeDiffValue,2)) # centers the X values for plotting
 
-#ppi <- 200
-#png(file=paste("SecondExperimentSingleAnglePower", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
+ppi <- 200
+png(file=paste("ThirdExperiement", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
 
 #write.csv(data.toPlotFinal, file="FirstRev.csv")
-plot(y=data.toPlot$Power, x=data.toPlot$TimeDiffValue,type="l",col="black", lwd="1", ylab="Power (in Watts)", xlab="Time in Seconds")
-points(x=6.20799994468689, y=data.toPlot$Power[64], pch=1)
-points(x=9.21700000762939, y=data.toPlot$Power[94], pch=2)
-points(x=12.2249999046326, y=data.toPlot$Power[124], pch=3)
-points(x=15.2359998226166, y=data.toPlot$Power[154], pch=4)
-points(x=18.3359999656677, y=data.toPlot$Power[184], pch=5) 
+plot(y=data.toPlot$Velocity, x=data.toPlot$TimeDiffValue,type="l",col="black", lwd="1", ylab="Speed (m/s)", xlab="Time in Seconds")
+points(x=5.04200005531311, y=9.7046379, pch=1)
+points(x=7.01699995994568, y=7.3661388, pch=2)
+points(x=9.01799988746643, y=4.7391983, pch=3)
+points(x=11.0299999713898, y=3.0626786, pch=4)
+points(x=13.0269999504089, y=5.1874850, pch=5) 
 
-legend("topleft", legend=c("6 Degrees", "7 Degrees", "8 Degrees", "9 Degrees", "10 Degrees"), bty="n", pch=1:5, lty=1, lwd=1)
+legend("topleft", legend=c("55 Degrees", "60 Degrees", "65 Degrees", "70 Degrees", "75 Degrees"), bty="n", pch=1:5, lty=1, lwd=1)
 
-#dev.off()
+dev.off()
