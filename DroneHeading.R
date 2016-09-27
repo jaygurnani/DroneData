@@ -1,0 +1,64 @@
+# Set the working directory
+setwd("/Users/mac/Desktop/Programming/COMP9596//DroneData")
+require(splines) #thx @Chase for the notice
+
+rad2deg <- function(rad) {(rad * 180) / (pi)}
+
+# Read the data
+data1 <- read.csv(file="freq.csv", header=TRUE, sep=",")
+data2 <- read.csv(file="freq2.csv", header=TRUE, sep=",")
+
+data <- rbind(data1, data2)
+
+# Convert date column to Date object
+data$Date <- as.POSIXct(data$Date)
+
+# Extract the data from column name to plot
+data.toPlot <- data[data$Battery > 5,]
+
+# Calculate the difference of each time point to the first (in seconds)
+data.toPlot$TimeDiff <- data.toPlot$Date - data.toPlot$Date[1]
+
+# Since TimeDiff is a time/date object, convert it to a numeric and store this as an extra column in data frame
+data.toPlot$TimeDiffValue <- as.numeric(data.toPlot$TimeDiff)
+
+# Multiple current and voltage to get Power
+data.toPlot$Power <- as.double(-(data.toPlot$Current/1000) * data.toPlot$Voltage/1000)
+
+#Get Mangnitude of Velocity
+data.toPlot$Velocity <- sqrt(data.toPlot$VelocityX^2 + data.toPlot$VelocityY^2 + data.toPlot$VelocityZ^2)
+data.toPlot$Mean <- mean(data.toPlot$Power)
+data.toPlot$TanDirection = rad2deg(atan(data.toPlot$VelocityY/data.toPlot$VelocityX))
+t0 = data.toPlot[data.toPlot$Method == '3',]$TanDirection
+t1 = data.toPlot[data.toPlot$Method == '2',]$TanDirection
+t2 = data.toPlot[data.toPlot$Method == '1',]$TanDirection
+t3 = data.toPlot[data.toPlot$Method == '0.75',]$TanDirection
+t4 = data.toPlot[data.toPlot$Method == '0.5',]$TanDirection
+t5 = data.toPlot[data.toPlot$Method == '0.25',]$TanDirection
+t6 = data.toPlot[data.toPlot$Method == '0.1',]$TanDirection
+
+r0 = max(t0) - min(t0)
+r1 = max(t1) - min(t1)
+r2 = max(t2) - min(t2)
+r3 = max(t3) - min(t3)
+r4 = max(t4) - min(t4)
+r5 = max(t5) - min(t5)
+r6 = max(t6) - min(t6)
+
+#dY <- diff(data.toPlot$Velocity)/diff(data.toPlot$TimeDiffValue)  # the derivative of your function
+#dX <- rowMeans(embed(data.toPlot$TimeDiffValue,2)) # centers the X values for plotting
+
+#ppi <- 200
+#png(file=paste("FourthExperimentSingleAnglePower", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
+
+#write.csv(data.toPlotFinal, file="FirstRev.csv")
+plot(y=c(r0,r1, r2, r3, r4, r5, r6), x=c('3','2','1', '0.75', '0.5', '0.25', '0.1'), xlim=c(3,0), type="p",col="black", lwd="1", ylab="Power (in Watts)", xlab="Time in Seconds")
+#points(x=data.toPlot$TimeDiffValue[68], y=data.toPlot$Power[68], pch=1)
+#points(x=data.toPlot$TimeDiffValue[98], y=data.toPlot$Power[98], pch=2)
+#points(x=data.toPlot$TimeDiffValue[128], y=data.toPlot$Power[128], pch=3)
+#points(x=data.toPlot$TimeDiffValue[158], y=data.toPlot$Power[158], pch=4)
+#points(x=data.toPlot$TimeDiffValue[188], y=data.toPlot$Power[188], pch=5) 
+
+#legend("topleft", legend=c("16 Degrees", "17 Degrees", "18 Degrees", "19 Degrees", "20 Degrees"), bty="n", pch=1:5, lty=1, lwd=1)
+
+#dev.off()
