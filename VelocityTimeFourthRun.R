@@ -3,7 +3,7 @@ setwd("/Users/mac/Desktop/Programming/COMP9596//DroneData")
 require(splines) #thx @Chase for the notice
 
 # Read the data
-data <- read.csv(file="freq2.csv", header=TRUE, sep=",")
+data <- read.csv(file="freq5.csv", header=TRUE, sep=",")
 
 # Convert date column to Date object
 data$Date <- as.POSIXct(data$Date)

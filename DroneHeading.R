@@ -5,10 +5,12 @@ require(splines) #thx @Chase for the notice
 rad2deg <- function(rad) {(rad * 180) / (pi)}
 
 # Read the data
-data1 <- read.csv(file="freq.csv", header=TRUE, sep=",")
+data1 <- read.csv(file="freq1.csv", header=TRUE, sep=",")
 data2 <- read.csv(file="freq2.csv", header=TRUE, sep=",")
+data3 <- read.csv(file="freq5.csv", header=TRUE, sep=",")
+data4 <- read.csv(file="freq6.csv", header=TRUE, sep=",")
 
-data <- rbind(data1, data2)
+data <- rbind(data1, data2, data3, data4)
 
 # Convert date column to Date object
 data$Date <- as.POSIXct(data$Date)
@@ -28,7 +30,10 @@ data.toPlot$Power <- as.double(-(data.toPlot$Current/1000) * data.toPlot$Voltage
 #Get Mangnitude of Velocity
 data.toPlot$Velocity <- sqrt(data.toPlot$VelocityX^2 + data.toPlot$VelocityY^2 + data.toPlot$VelocityZ^2)
 data.toPlot$Mean <- mean(data.toPlot$Power)
-data.toPlot$TanDirection = rad2deg(atan(data.toPlot$VelocityY/data.toPlot$VelocityX))
+data.toPlot$TanDirection = rad2deg(atan(abs(data.toPlot$VelocityY)/abs(data.toPlot$VelocityX)))
+
+tt = data.toPlot[data.toPlot$Method == '5.1',]$TanDirection
+t = data.toPlot[data.toPlot$Method == '4',]$TanDirection
 t0 = data.toPlot[data.toPlot$Method == '3',]$TanDirection
 t1 = data.toPlot[data.toPlot$Method == '2',]$TanDirection
 t2 = data.toPlot[data.toPlot$Method == '1',]$TanDirection
@@ -37,6 +42,8 @@ t4 = data.toPlot[data.toPlot$Method == '0.5',]$TanDirection
 t5 = data.toPlot[data.toPlot$Method == '0.25',]$TanDirection
 t6 = data.toPlot[data.toPlot$Method == '0.1',]$TanDirection
 
+rr = max(tt) - min(tt)
+r = max(t) - min(t)
 r0 = max(t0) - min(t0)
 r1 = max(t1) - min(t1)
 r2 = max(t2) - min(t2)
@@ -48,11 +55,18 @@ r6 = max(t6) - min(t6)
 #dY <- diff(data.toPlot$Velocity)/diff(data.toPlot$TimeDiffValue)  # the derivative of your function
 #dX <- rowMeans(embed(data.toPlot$TimeDiffValue,2)) # centers the X values for plotting
 
-#ppi <- 200
-#png(file=paste("FourthExperimentSingleAnglePower", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
+ppi <- 200
+png(file=paste("FreqFinal", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
 
 #write.csv(data.toPlotFinal, file="FirstRev.csv")
-plot(y=c(r0,r1, r2, r3, r4, r5, r6), x=c('3','2','1', '0.75', '0.5', '0.25', '0.1'), xlim=c(3,0), type="p",col="black", lwd="1", ylab="Power (in Watts)", xlab="Time in Seconds")
+y2 = c(rr, r, r0,r1, r2, r3, r4, r5, r6)
+x2 = c('5', '4', '3','2','1', '0.75', '0.5', '0.25', '0.1')
+
+plot(y=y2, x=x2, xlim=c(5,0), type="p",col="black", lwd="1", ylab="Maximum Degrees", xlab="Interval Times (in seconds)")
+axis(1, at = seq(.25, .75, .25), labels = seq(.25, .75, .25), las=2)
+abline(a=20, b=0, lty =3)
+
+#plot(y=data.toPlot$TanDirection, x=data.toPlot$TimeDiffValue, xlim=c(3,0), type="p",col="black", lwd="1", ylab="Power (in Watts)", xlab="Time in Seconds")
 #points(x=data.toPlot$TimeDiffValue[68], y=data.toPlot$Power[68], pch=1)
 #points(x=data.toPlot$TimeDiffValue[98], y=data.toPlot$Power[98], pch=2)
 #points(x=data.toPlot$TimeDiffValue[128], y=data.toPlot$Power[128], pch=3)
@@ -61,4 +75,4 @@ plot(y=c(r0,r1, r2, r3, r4, r5, r6), x=c('3','2','1', '0.75', '0.5', '0.25', '0.
 
 #legend("topleft", legend=c("16 Degrees", "17 Degrees", "18 Degrees", "19 Degrees", "20 Degrees"), bty="n", pch=1:5, lty=1, lwd=1)
 
-#dev.off()
+dev.off()
