@@ -7,10 +7,15 @@ rad2deg <- function(rad) {(rad * 180) / (pi)}
 # Read the data
 data1 <- read.csv(file="freq1.csv", header=TRUE, sep=",")
 data2 <- read.csv(file="freq2.csv", header=TRUE, sep=",")
-data3 <- read.csv(file="freq5.csv", header=TRUE, sep=",")
-data4 <- read.csv(file="freq6.csv", header=TRUE, sep=",")
+data3 <- read.csv(file="freq3.csv", header=TRUE, sep=",")
+data4 <- read.csv(file="freq4.csv", header=TRUE, sep=",")
+data5 <- read.csv(file="freq5.csv", header=TRUE, sep=",")
+data6 <- read.csv(file="freq6.csv", header=TRUE, sep=",")
+data7 <- read.csv(file="freq7.csv", header=TRUE, sep=",")
+data8 <- read.csv(file="freq8.csv", header=TRUE, sep=",")
+#data9 <- read.csv(file="freq9.csv", header=TRUE, sep=",")
 
-data <- rbind(data1, data2, data3, data4)
+data <- rbind(data1, data2, data3, data4, data5, data6, data7, data8)
 
 # Convert date column to Date object
 data$Date <- as.POSIXct(data$Date)
@@ -32,37 +37,37 @@ data.toPlot$Velocity <- sqrt(data.toPlot$VelocityX^2 + data.toPlot$VelocityY^2 +
 data.toPlot$Mean <- mean(data.toPlot$Power)
 data.toPlot$TanDirection = rad2deg(atan(abs(data.toPlot$VelocityY)/abs(data.toPlot$VelocityX)))
 
-tt = data.toPlot[data.toPlot$Method == '5.1',]$TanDirection
-t = data.toPlot[data.toPlot$Method == '4',]$TanDirection
-t0 = data.toPlot[data.toPlot$Method == '3',]$TanDirection
-t1 = data.toPlot[data.toPlot$Method == '2',]$TanDirection
-t2 = data.toPlot[data.toPlot$Method == '1',]$TanDirection
-t3 = data.toPlot[data.toPlot$Method == '0.75',]$TanDirection
-t4 = data.toPlot[data.toPlot$Method == '0.5',]$TanDirection
-t5 = data.toPlot[data.toPlot$Method == '0.25',]$TanDirection
-t6 = data.toPlot[data.toPlot$Method == '0.1',]$TanDirection
+t0 = data.toPlot[data.toPlot$Method == '5',]$TanDirection
+t1 = data.toPlot[data.toPlot$Method == '4',]$TanDirection
+t2 = data.toPlot[data.toPlot$Method == '3',]$TanDirection
+t3 = data.toPlot[data.toPlot$Method == '2',]$TanDirection
+t4 = data.toPlot[data.toPlot$Method == '1',]$TanDirection
+t5 = data.toPlot[data.toPlot$Method == '0.75',]$TanDirection
+t6 = data.toPlot[data.toPlot$Method == '0.5',]$TanDirection
+t7 = data.toPlot[data.toPlot$Method == '0.25',]$TanDirection
+t8 = data.toPlot[data.toPlot$Method == '0.1',]$TanDirection
 
-rr = max(tt) - min(tt)
-r = max(t) - min(t)
-r0 = max(t0) - min(t0)
+#r0 = max(t0) - min(t0)
 r1 = max(t1) - min(t1)
 r2 = max(t2) - min(t2)
 r3 = max(t3) - min(t3)
 r4 = max(t4) - min(t4)
 r5 = max(t5) - min(t5)
 r6 = max(t6) - min(t6)
+r7 = max(t7) - min(t7)
+r8 = max(t8) - min(t8)
 
 #dY <- diff(data.toPlot$Velocity)/diff(data.toPlot$TimeDiffValue)  # the derivative of your function
 #dX <- rowMeans(embed(data.toPlot$TimeDiffValue,2)) # centers the X values for plotting
 
 ppi <- 200
-png(file=paste("FreqFinal", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
+#png(file=paste("10MS", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
 
 #write.csv(data.toPlotFinal, file="FirstRev.csv")
-y2 = c(rr, r, r0,r1, r2, r3, r4, r5, r6)
-x2 = c('5', '4', '3','2','1', '0.75', '0.5', '0.25', '0.1')
+y2 = c(r1, r2, r3, r4, r5, r6, r7, r8)
+x2 = c('4', '3','2','1', '0.75', '0.5', '0.25', '0.1')
 
-plot(y=y2, x=x2, xlim=c(5,0), type="p",col="black", lwd="1", ylab="Maximum Degrees", xlab="Interval Times (in seconds)")
+plot(y=y2, x=x2, xlim=c(4,0), type="p",col="black", lwd="1", ylab="Maximum Degrees", xlab="Interval Times (in seconds)")
 axis(1, at = seq(.25, .75, .25), labels = seq(.25, .75, .25), las=2)
 abline(a=20, b=0, lty =3)
 
@@ -75,4 +80,4 @@ abline(a=20, b=0, lty =3)
 
 #legend("topleft", legend=c("16 Degrees", "17 Degrees", "18 Degrees", "19 Degrees", "20 Degrees"), bty="n", pch=1:5, lty=1, lwd=1)
 
-dev.off()
+#dev.off()

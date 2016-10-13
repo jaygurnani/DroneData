@@ -152,9 +152,10 @@ data.toPlot <- rbind(data0.toPlotFinal, data3.toPlotFinal, data4.toPlotFinal, da
 
 #write.csv(data.toPlotFinal, file="toPlotFinal")
 ppi <- 200
-png(file=paste("FinalBoxPlot", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
+#png(file=paste("10 Meters Power Speed Mean", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
 
 #Final
-boxplot(data.toPlot$Power~data.toPlot$VelocitySolid,data=data.toPlot, main="Power vs Speed Box Plot test", xlab="Velocity (m/s)", ylab="Power in Watts")
+boxplot(data.toPlot$Mean~data.toPlot$VelocitySolid,data=data.toPlot, ylim=c(90,240),
+        main="Power vs Speed Mean - 10 meters", xlab="Velocity (m/s)", ylab="Power (Watts)")
 
-dev.off()
+#dev.off()
