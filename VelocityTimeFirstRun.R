@@ -4,7 +4,7 @@ require(splines) #thx @Chase for the notice
 library(geosphere)
 
 # Read the data
-data <- read.csv(file="1.csv", header=TRUE, sep=",")
+data <- read.csv(file="first.csv", header=TRUE, sep=",")
 
 # Convert date column to Date object
 data$Date <- as.POSIXct(data$Date)
@@ -35,7 +35,7 @@ data.toPlot$Mean <- mean(data.toPlot$Power)
 #png(file=paste("FirstExperimentSingleAnglePower", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
 
 #write.csv(data.toPlotFinal, file="FirstRev.csv")
-plot(y=data.toPlot$Power, x=data.toPlot$TimeDiffValue,type="l",col="black", lwd="1", ylab="Power (in Watts)", xlab="Time in Seconds")
+plot(y=data.toPlot$Velocity, x=data.toPlot$TimeDiffValue,type="l",col="black", lwd="1", ylab="Power (in Watts)", xlab="Time in Seconds")
 points(x=7.00800013542175, y=data.toPlot$Power[70], pch=1)
 points(x=10.0150001049042, y=data.toPlot$Power[101], pch=2)
 points(x=13.0260000228882, y=data.toPlot$Power[131], pch=3)

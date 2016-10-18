@@ -13,7 +13,7 @@ data5 <- read.csv(file="freq5.csv", header=TRUE, sep=",")
 data6 <- read.csv(file="freq6.csv", header=TRUE, sep=",")
 data7 <- read.csv(file="freq7.csv", header=TRUE, sep=",")
 data8 <- read.csv(file="freq8.csv", header=TRUE, sep=",")
-#data9 <- read.csv(file="freq9.csv", header=TRUE, sep=",")
+data9 <- read.csv(file="freq9.csv", header=TRUE, sep=",")
 
 data <- rbind(data1, data2, data3, data4, data5, data6, data7, data8)
 
@@ -47,7 +47,7 @@ t6 = data.toPlot[data.toPlot$Method == '0.5',]$TanDirection
 t7 = data.toPlot[data.toPlot$Method == '0.25',]$TanDirection
 t8 = data.toPlot[data.toPlot$Method == '0.1',]$TanDirection
 
-#r0 = max(t0) - min(t0)
+r0 = max(t0) - min(t0)
 r1 = max(t1) - min(t1)
 r2 = max(t2) - min(t2)
 r3 = max(t3) - min(t3)
@@ -64,12 +64,12 @@ ppi <- 200
 #png(file=paste("10MS", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
 
 #write.csv(data.toPlotFinal, file="FirstRev.csv")
-y2 = c(r1, r2, r3, r4, r5, r6, r7, r8)
-x2 = c('4', '3','2','1', '0.75', '0.5', '0.25', '0.1')
+y2 = c(r0, r1, r2, r3, r4, r5, r6, r7, r8)
+x2 = c('5', '4', '3','2','1', '0.75', '0.5', '0.25', '0.1')
 
-plot(y=y2, x=x2, xlim=c(4,0), type="p",col="black", lwd="1", ylab="Maximum Degrees", xlab="Interval Times (in seconds)")
+plot(y=y2, x=x2, xlim=c(5,0), type="p",col="black", lwd="1", ylab="Maximum Degrees", xlab="Interval Times (in seconds)", ylim=c(0, 50))
 axis(1, at = seq(.25, .75, .25), labels = seq(.25, .75, .25), las=2)
-abline(a=20, b=0, lty =3)
+abline(a=40, b=0, lty =3)
 
 #plot(y=data.toPlot$TanDirection, x=data.toPlot$TimeDiffValue, xlim=c(3,0), type="p",col="black", lwd="1", ylab="Power (in Watts)", xlab="Time in Seconds")
 #points(x=data.toPlot$TimeDiffValue[68], y=data.toPlot$Power[68], pch=1)
