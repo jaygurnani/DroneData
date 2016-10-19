@@ -21,7 +21,7 @@ data <- rbind(data1, data2, data3, data4, data5, data6, data7, data8, data9)
 data$Date <- as.POSIXct(data$Date)
 
 # Extract the data from column name to plot
-data.toPlot <- data[data$Battery > 5,]
+data.toPlot <- data
 
 # Calculate the difference of each time point to the first (in seconds)
 data.toPlot$TimeDiff <- data.toPlot$Date - data.toPlot$Date[1]
@@ -70,23 +70,17 @@ r8 = max(t8) - min(t8)
 #dX <- rowMeans(embed(data.toPlot$TimeDiffValue,2)) # centers the X values for plotting
 
 ppi <- 200
-#png(file=paste("10MS", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
+png(file=paste("10MsAngles", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
 
 #write.csv(data.toPlotFinal, file="FirstRev.csv")
-y2 = c(r0, r1, r2, r3, r4, r5, r6, r7, r8)
-x2 = c('5', '4', '3','2','1', '0.75', '0.5', '0.25', '0.1')
+y2 = c(r1, r2, r3, r4, r5, r6, r7, r8)
+x2 = c('4', '3','2','1', '0.75', '0.5', '0.25', '0.1')
 
-plot(y=y2, x=x2, xlim=c(5,0), type="p",col="black", lwd="1", ylab="Maximum Degrees", xlab="Interval Times (in seconds)", ylim=c(0, 50))
+plot(y=y2, x=x2, xlim=c(4,0), type="p",col="black", lwd="1", ylab="Degrees turned", xlab="Interval Times (in seconds)", ylim=c(0, 30),
+     main="Effect of turning order on speed for different order frequencies - 10 m/s Initial speed")
 axis(1, at = seq(.25, .75, .25), labels = seq(.25, .75, .25), las=2)
-abline(a=40, b=0, lty =3)
+abline(a=20, b=0, lty =3)
 
-#plot(y=data.toPlot$TanDirection, x=data.toPlot$TimeDiffValue, xlim=c(3,0), type="p",col="black", lwd="1", ylab="Power (in Watts)", xlab="Time in Seconds")
-#points(x=data.toPlot$TimeDiffValue[68], y=data.toPlot$Power[68], pch=1)
-#points(x=data.toPlot$TimeDiffValue[98], y=data.toPlot$Power[98], pch=2)
-#points(x=data.toPlot$TimeDiffValue[128], y=data.toPlot$Power[128], pch=3)
-#points(x=data.toPlot$TimeDiffValue[158], y=data.toPlot$Power[158], pch=4)
-#points(x=data.toPlot$TimeDiffValue[188], y=data.toPlot$Power[188], pch=5) 
+legend("topleft", legend=c("Angle instructed to turn"), bty="n", lty=3, lwd=1)
 
-#legend("topleft", legend=c("16 Degrees", "17 Degrees", "18 Degrees", "19 Degrees", "20 Degrees"), bty="n", pch=1:5, lty=1, lwd=1)
-
-#dev.off()
+dev.off()
