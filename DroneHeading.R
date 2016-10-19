@@ -15,7 +15,7 @@ data7 <- read.csv(file="freq7.csv", header=TRUE, sep=",")
 data8 <- read.csv(file="freq8.csv", header=TRUE, sep=",")
 data9 <- read.csv(file="freq9.csv", header=TRUE, sep=",")
 
-data <- rbind(data1, data2, data3, data4, data5, data6, data7, data8)
+data <- rbind(data1, data2, data3, data4, data5, data6, data7, data8, data9)
 
 # Convert date column to Date object
 data$Date <- as.POSIXct(data$Date)
@@ -35,7 +35,14 @@ data.toPlot$Power <- as.double(-(data.toPlot$Current/1000) * data.toPlot$Voltage
 #Get Mangnitude of Velocity
 data.toPlot$Velocity <- sqrt(data.toPlot$VelocityX^2 + data.toPlot$VelocityY^2 + data.toPlot$VelocityZ^2)
 data.toPlot$Mean <- mean(data.toPlot$Power)
-data.toPlot$TanDirection = rad2deg(atan(abs(data.toPlot$VelocityY)/abs(data.toPlot$VelocityX)))
+data.toPlot$TanDirection = rad2deg(atan(data.toPlot$VelocityY/data.toPlot$VelocityX))
+is.nan.data.frame <- function(x)
+  do.call(cbind, lapply(x, is.nan))
+
+data.toPlot$TanDirection[is.nan(data.toPlot$TanDirection)] <- 90
+
+data.toPlot$TanDirection[data.toPlot$TanDirection < 0] <- 180 + (data.toPlot$TanDirection[data.toPlot$TanDirection < 0])
+
 
 t0 = data.toPlot[data.toPlot$Method == '5',]$TanDirection
 t1 = data.toPlot[data.toPlot$Method == '4',]$TanDirection
@@ -47,6 +54,7 @@ t6 = data.toPlot[data.toPlot$Method == '0.5',]$TanDirection
 t7 = data.toPlot[data.toPlot$Method == '0.25',]$TanDirection
 t8 = data.toPlot[data.toPlot$Method == '0.1',]$TanDirection
 
+
 r0 = max(t0) - min(t0)
 r1 = max(t1) - min(t1)
 r2 = max(t2) - min(t2)
@@ -56,6 +64,7 @@ r5 = max(t5) - min(t5)
 r6 = max(t6) - min(t6)
 r7 = max(t7) - min(t7)
 r8 = max(t8) - min(t8)
+
 
 #dY <- diff(data.toPlot$Velocity)/diff(data.toPlot$TimeDiffValue)  # the derivative of your function
 #dX <- rowMeans(embed(data.toPlot$TimeDiffValue,2)) # centers the X values for plotting
