@@ -4,13 +4,13 @@ require(splines) #thx @Chase for the notice
 library(geosphere)
 
 # Read the data
-data <- read.csv(file="first.csv", header=TRUE, sep=",")
+data <- read.csv(file="5msAngles.csv", header=TRUE, sep=",")
 
 # Convert date column to Date object
 data$Date <- as.POSIXct(data$Date)
 
 # Extract the data from column name to plot
-data.toPlot <- data[data$Battery > 5,]
+data.toPlot <- data
 
 # Calculate the difference of each time point to the first (in seconds)
 data.toPlot$TimeDiff <- data.toPlot$Date - data.toPlot$Date[1]
@@ -27,21 +27,25 @@ data.toPlot$Velocity <- sqrt(data.toPlot$VelocityX^2 + data.toPlot$VelocityY^2 +
 data.toPlot$Mean <- mean(data.toPlot$Power)
 
 
-
-#dY <- diff(data.toPlot$Velocity)/diff(data.toPlot$TimeDiffValue)  # the derivative of your function
-#dX <- rowMeans(embed(data.toPlot$TimeDiffValue,2)) # centers the X values for plotting
-
-#ppi <- 200
-#png(file=paste("FirstExperimentSingleAnglePower", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
+ppi <- 200
+#png(file=paste("VelocityTurningIntervals5ms", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
 
 #write.csv(data.toPlotFinal, file="FirstRev.csv")
-plot(y=data.toPlot$Velocity, x=data.toPlot$TimeDiffValue,type="l",col="black", lwd="1", ylab="Power (in Watts)", xlab="Time in Seconds")
-points(x=7.00800013542175, y=data.toPlot$Power[70], pch=1)
-points(x=10.0150001049042, y=data.toPlot$Power[101], pch=2)
-points(x=13.0260000228882, y=data.toPlot$Power[131], pch=3)
-points(x=16.0360000133514, y=data.toPlot$Power[161], pch=4)
-points(x=19.058000087738, y=data.toPlot$Power[191], pch=5) 
+par(mar=c(5.1, 4.1, 4.1, 8.1), xpd=TRUE)
+plot(y=data.toPlot$Velocity, x=data.toPlot$TimeDiffValue,type="l",col="black", lwd="1", ylab="Power (in Watts)", xlab="Time in Seconds",
+     main="Effect of velocity for different order frequencies - 5 m/s Initial speed")
+points(x=data.toPlot$TimeDiffValue[67], y=data.toPlot$Velocity[67], pch=1)
+points(x=data.toPlot$TimeDiffValue[117], y=data.toPlot$Velocity[117], pch=2)
+points(x=data.toPlot$TimeDiffValue[157], y=data.toPlot$Velocity[157], pch=3)
+points(x=data.toPlot$TimeDiffValue[187], y=data.toPlot$Velocity[187], pch=4)
+points(x=data.toPlot$TimeDiffValue[207], y=data.toPlot$Velocity[207], pch=5) 
+points(x=data.toPlot$TimeDiffValue[217], y=data.toPlot$Velocity[217], pch=6)
+points(x=data.toPlot$TimeDiffValue[225], y=data.toPlot$Velocity[225], pch=7) 
+points(x=data.toPlot$TimeDiffValue[231], y=data.toPlot$Velocity[231], pch=8) 
+points(x=data.toPlot$TimeDiffValue[234], y=data.toPlot$Velocity[234], pch=9) 
 
-legend("topleft", legend=c("1 Degrees", "2 Degrees", "3 Degrees", "4 Degrees", "5 Degrees"), bty="n", pch=1:5, lty=1, lwd=1)
+legend("topright",  inset=c(-0.25,0), legend=c("5s interval", "4s interval", "3s interval", "2s interval", 
+                           "1s interval", "0.75s interval", "0.5s interval", "0.25s interval", 
+                           "0.1s interval"), bty="n", pch=1:9, lty=1, lwd=1)
 
 #dev.off()
