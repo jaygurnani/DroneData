@@ -91,11 +91,11 @@ data.toPlot <- rbind(data0.toPlot, data3.toPlot, data4.toPlot, data5.toPlot, dat
 
 #write.csv(data.toPlotFinal, file="toPlotFinal")
 ppi <- 200
-png(file=paste("AngularVelocityMean", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
+png(file=paste("AngleDegree", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
 
 #Final
-plot(data.toPlot$Mean~ data.toPlot$AngularVelocity, data=data.toPlot, main="Mean Power vs Angular Velocity", xlab="Angular Velocity", ylab="Power in Watts", ylim= c(135, 185))
-fit <- lm(data.toPlot$Mean ~ poly(data.toPlot$AngularVelocity, 1, raw=TRUE))
-points(data.toPlot$AngularVelocity, predict(fit), type="l", col="red", lwd=2)
+plot(data.toPlot$Mean~ data.toPlot$AngularVelocity, data=data.toPlot, main="Mean Power vs Angular Velocity", xlab="Angular Velocity", ylab="Power in Watts")
+#fit <- lm(data.toPlot$Mean ~ poly(data.toPlot$AngularVelocity, 1, raw=TRUE))
+#points(data.toPlot$AngularVelocity, predict(fit), type="l", col="red", lwd=2)
 dev.off()
 

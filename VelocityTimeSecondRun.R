@@ -3,7 +3,7 @@ setwd("/Users/mac/Desktop/Programming/COMP9596//DroneData")
 require(splines) #thx @Chase for the notice
 
 # Read the data
-data <- read.csv(file="third.csv", header=TRUE, sep=",")
+data <- read.csv(file="16to20.csv", header=TRUE, sep=",")
 
 # Convert date column to Date object
 data$Date <- as.POSIXct(data$Date)
@@ -28,17 +28,17 @@ data.toPlot$Mean <- mean(data.toPlot$Power)
 #dX <- rowMeans(embed(data.toPlot$TimeDiffValue,2)) # centers the X values for plotting
 
 #ppi <- 200
-png(file=paste("5MsFinalSpeed", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
+#png(file=paste("5MsFinalSpeed", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
 
 #write.csv(data.toPlotFinal, file="FirstRev.csv")
 plot(y=data.toPlot$Velocity, ylim=c(4,5), x=data.toPlot$TimeDiffValue,type="l",col="black", lwd="1", ylab="Power (in Watts)", xlab="Time in Seconds")
-points(x=data.toPlot$TimeDiffValue[62], y=data.toPlot$Velocity[62], pch=1) 
-points(x=data.toPlot$TimeDiffValue[92], y=data.toPlot$Velocity[92], pch=2)
-points(x=data.toPlot$TimeDiffValue[122], y=data.toPlot$Velocity[122], pch=3)
-points(x=data.toPlot$TimeDiffValue[152], y=data.toPlot$Velocity[152], pch=4)
-points(x=data.toPlot$TimeDiffValue[152], y=data.toPlot$Velocity[182], pch=5)
+points(x=data.toPlot$TimeDiffValue[76], y=data.toPlot$Velocity[62], pch=1) 
+points(x=data.toPlot$TimeDiffValue[106], y=data.toPlot$Velocity[92], pch=2)
+points(x=data.toPlot$TimeDiffValue[136], y=data.toPlot$Velocity[122], pch=3)
+points(x=data.toPlot$TimeDiffValue[166], y=data.toPlot$Velocity[152], pch=4)
+points(x=data.toPlot$TimeDiffValue[196], y=data.toPlot$Velocity[182], pch=5)
 
 
 legend("topleft", legend=c("11 Degrees", "12 Degrees", "13 Degrees", "14 Degrees", "15 Degrees"), bty="n", pch=1:5, lty=1, lwd=1)
 
-dev.off()
+#dev.off()

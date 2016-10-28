@@ -4,8 +4,8 @@ require(splines) #thx @Chase for the notice
 library(geosphere)
 
 # Read the data
-data1 <- read.csv(file="1.csv", header=TRUE, sep=",")
-data2 <- read.csv(file="2.csv", header=TRUE, sep=",")
+data1 <- read.csv(file="thirdRun1.csv", header=TRUE, sep=",")
+data2 <- read.csv(file="16to20.csv", header=TRUE, sep=",")
 data3 <- read.csv(file="3.csv", header=TRUE, sep=",")
 data4 <- read.csv(file="10ms20to40.csv", header=TRUE, sep=",")
 
@@ -51,24 +51,24 @@ data.toPlot$Mean <- mean(data.toPlot$Power)
 #dX <- rowMeans(embed(data.toPlot$TimeDiffValue,2)) # centers the X values for plotting
 
 ppi <- 200
-png(file=paste("10msTurnAngle", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
+#png(file=paste("10msTurnAngle2", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
 
 #write.csv(data.toPlotFinal, file="FirstRev.csv")
 par(mar=c(5.1, 4.1, 4.1, 8.1), xpd=TRUE)
 plot(y=data.toPlot$Velocity, x=data.toPlot$TimeDiffValue,type="l",
      col="black", lwd="1", ylab="Velocity (m/s)", xlab="Time (in Seconds)", main="Turning angle limitation for 10 m/s")
-points(x=data.toPlot$TimeDiffValue[71], y=data.toPlot$Velocity[73], pch=1)
-points(x=data.toPlot$TimeDiffValue[101], y=data.toPlot$Velocity[101], pch=2)
-points(x=data.toPlot$TimeDiffValue[131], y=data.toPlot$Velocity[131], pch=3)
-points(x=data.toPlot$TimeDiffValue[161], y=data.toPlot$Velocity[161], pch=4)
-points(x=data.toPlot$TimeDiffValue[191], y=data.toPlot$Velocity[191], pch=5)
-points(x=data.toPlot$TimeDiffValue[337], y=data.toPlot$Velocity[337], pch=6) 
-points(x=data.toPlot$TimeDiffValue[367], y=data.toPlot$Velocity[367], pch=7) 
-points(x=data.toPlot$TimeDiffValue[397], y=data.toPlot$Velocity[397], pch=8) 
-points(x=data.toPlot$TimeDiffValue[427], y=data.toPlot$Velocity[427], pch=9) 
-points(x=data.toPlot$TimeDiffValue[457], y=data.toPlot$Velocity[457], pch=10) 
+points(x=data.toPlot$TimeDiffValue[102], y=data.toPlot$Velocity[102], pch=1)
+points(x=data.toPlot$TimeDiffValue[132], y=data.toPlot$Velocity[132], pch=2)
+points(x=data.toPlot$TimeDiffValue[162], y=data.toPlot$Velocity[162], pch=3)
+points(x=data.toPlot$TimeDiffValue[192], y=data.toPlot$Velocity[192], pch=4)
+points(x=data.toPlot$TimeDiffValue[222], y=data.toPlot$Velocity[222], pch=5)
+points(x=data.toPlot$TimeDiffValue[358], y=data.toPlot$Velocity[358], pch=6) 
+points(x=data.toPlot$TimeDiffValue[388], y=data.toPlot$Velocity[388], pch=7) 
+points(x=data.toPlot$TimeDiffValue[418], y=data.toPlot$Velocity[418], pch=8) 
+points(x=data.toPlot$TimeDiffValue[448], y=data.toPlot$Velocity[448], pch=9) 
+points(x=data.toPlot$TimeDiffValue[478], y=data.toPlot$Velocity[478], pch=10)
 
-legend("topright", inset=c(-0.22,0), legend=c("1 Degrees", "2 Degrees", "3 Degrees", "4 Degrees", "5 Degrees",
-                                             "6 Degrees", "7 Degrees", "8 Degrees", "9 Degrees", "10 Degrees"), bty="n", pch=1:10, lty=1, lwd=1)
+legend("topright", inset=c(-0.22,0), legend=c("22 Degrees", "24 Degrees", "26 Degrees", "28 Degrees", "30 Degrees",
+                                             "40 Degrees", "50 Degrees", "60 Degrees", "70 Degrees", "80 Degrees"), bty="n", pch=1:10, lty=1, lwd=1)
 
-dev.off()
+#dev.off()

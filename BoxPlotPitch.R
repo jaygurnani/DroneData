@@ -173,14 +173,14 @@ data14.toPlot$Velocity <- sqrt(data14.toPlot$VelocityX^2 + data14.toPlot$Velocit
 data14.toPlot$Mean <- mean(data14.toPlot$Power)
 
 # Extract the data from column name to plot
-#data.toPlot <- rbind(data0.toPlot, data3.toPlot, data4.toPlot, data5.toPlot, data6.toPlot, data7.toPlot, data8.toPlot, data9.toPlot, data10.toPlot, data11.toPlot, data12.toPlot, data13.toPlot, data14.toPlot)
-data.toPlot = data5.toPlot
+data.toPlot <- rbind(data0.toPlot, data3.toPlot, data4.toPlot, data5.toPlot, data6.toPlot, data7.toPlot, data8.toPlot, data9.toPlot, data10.toPlot, data11.toPlot, data12.toPlot, data13.toPlot, data14.toPlot)
+#data.toPlot = data5.toPlot
 
 #write.csv(data.toPlotFinal, file="toPlotFinal")
-#ppi <- 200
-#png(file=paste("PitchBoxPlot", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
+ppi <- 200
+png(file=paste("PitchDegree", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
 
 #Final
-plot(y=data4.toPlot$Velocity, x=data4.toPlot$TimeDiffValue, main="Power vs Degree of change", xlab="Time", ylab="Velocity")
-#dev.off()
+plot(y=data.toPlot$Mean, x=data.toPlot$Degree, main="Mean Power vs Degree of change", xlab="Degree of change", ylab="Power in Watts")
+dev.off()
 
