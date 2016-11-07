@@ -2,10 +2,11 @@
 setwd("/Users/mac/Desktop/Programming/COMP9596//DroneData")
 require(splines) #thx @Chase for the notice
 library(geosphere)
+rad2deg <- function(rad) {(rad * 180) / (pi)}
 
 # Read the data
-data1 <- read.csv(file="thirdRun1.csv", header=TRUE, sep=",")
-data2 <- read.csv(file="16to20.csv", header=TRUE, sep=",")
+data1 <- read.csv(file="1.csv", header=TRUE, sep=",")
+data2 <- read.csv(file="2.csv", header=TRUE, sep=",")
 data3 <- read.csv(file="3.csv", header=TRUE, sep=",")
 data4 <- read.csv(file="10ms20to40.csv", header=TRUE, sep=",")
 
@@ -23,7 +24,7 @@ data3$TimeDiff <- data3$Date - data3$Date[1] + max(data2$TimeDiff)
 data4$Date <-as.POSIXct(data4$Date)
 data4$TimeDiff <- data4$Date - data4$Date[1] + max(data3$TimeDiff)
 
-data <- rbind(data1, data2)
+data <- rbind(data3, data4)
 
 # Convert date column to Date object
 #data$Date <- as.POSIXct(data$Date)
@@ -44,29 +45,34 @@ data.toPlot$Power <- as.double(-(data.toPlot$Current/1000) * data.toPlot$Voltage
 #Get Mangnitude of Velocity
 data.toPlot$Velocity <- sqrt(data.toPlot$VelocityX^2 + data.toPlot$VelocityY^2 + data.toPlot$VelocityZ^2)
 data.toPlot$Mean <- mean(data.toPlot$Power)
+data.toPlot$TanDirection = rad2deg(atan(data.toPlot$VelocityY/data.toPlot$VelocityX))
+is.nan.data.frame <- function(x)
+  do.call(cbind, lapply(x, is.nan))
+data.toPlot$TanDirection[is.nan(data.toPlot$TanDirection)] <- 90
 
+data.toPlot$TanDirection[data.toPlot$TanDirection < 0] <- 180 + (data.toPlot$TanDirection[data.toPlot$TanDirection < 0])
 
 
 #dY <- diff(data.toPlot$Velocity)/diff(data.toPlot$TimeDiffValue)  # the derivative of your function
 #dX <- rowMeans(embed(data.toPlot$TimeDiffValue,2)) # centers the X values for plotting
 
 ppi <- 200
-#png(file=paste("10msTurnAngle2", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
+#png(file=paste("10msTurnAngle2Power", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
 
 #write.csv(data.toPlotFinal, file="FirstRev.csv")
 par(mar=c(5.1, 4.1, 4.1, 8.1), xpd=TRUE)
-plot(y=data.toPlot$Velocity, x=data.toPlot$TimeDiffValue,type="l",
-     col="black", lwd="1", ylab="Velocity (m/s)", xlab="Time (in Seconds)", main="Turning angle limitation for 10 m/s")
-points(x=data.toPlot$TimeDiffValue[102], y=data.toPlot$Velocity[102], pch=1)
-points(x=data.toPlot$TimeDiffValue[132], y=data.toPlot$Velocity[132], pch=2)
-points(x=data.toPlot$TimeDiffValue[162], y=data.toPlot$Velocity[162], pch=3)
-points(x=data.toPlot$TimeDiffValue[192], y=data.toPlot$Velocity[192], pch=4)
-points(x=data.toPlot$TimeDiffValue[222], y=data.toPlot$Velocity[222], pch=5)
-points(x=data.toPlot$TimeDiffValue[358], y=data.toPlot$Velocity[358], pch=6) 
-points(x=data.toPlot$TimeDiffValue[388], y=data.toPlot$Velocity[388], pch=7) 
-points(x=data.toPlot$TimeDiffValue[418], y=data.toPlot$Velocity[418], pch=8) 
-points(x=data.toPlot$TimeDiffValue[448], y=data.toPlot$Velocity[448], pch=9) 
-points(x=data.toPlot$TimeDiffValue[478], y=data.toPlot$Velocity[478], pch=10)
+plot(y=data.toPlot$Power, x=data.toPlot$TimeDiffValue,type="l",
+     col="black", lwd="1", ylab="Energy (Watts)", xlab="Time (in Seconds)", main="Turning angle limitation for 10 m/s")
+points(x=data.toPlot$TimeDiffValue[102], y=data.toPlot$Power[102], pch=1)
+points(x=data.toPlot$TimeDiffValue[132], y=data.toPlot$Power[132], pch=2)
+points(x=data.toPlot$TimeDiffValue[162], y=data.toPlot$Power[162], pch=3)
+points(x=data.toPlot$TimeDiffValue[192], y=data.toPlot$Power[192], pch=4)
+points(x=data.toPlot$TimeDiffValue[222], y=data.toPlot$Power[222], pch=5)
+points(x=data.toPlot$TimeDiffValue[358], y=data.toPlot$Power[358], pch=6) 
+points(x=data.toPlot$TimeDiffValue[388], y=data.toPlot$Power[388], pch=7) 
+points(x=data.toPlot$TimeDiffValue[418], y=data.toPlot$Power[418], pch=8) 
+points(x=data.toPlot$TimeDiffValue[448], y=data.toPlot$Power[448], pch=9) 
+points(x=data.toPlot$TimeDiffValue[478], y=data.toPlot$Power[478], pch=10)
 
 legend("topright", inset=c(-0.22,0), legend=c("22 Degrees", "24 Degrees", "26 Degrees", "28 Degrees", "30 Degrees",
                                              "40 Degrees", "50 Degrees", "60 Degrees", "70 Degrees", "80 Degrees"), bty="n", pch=1:10, lty=1, lwd=1)

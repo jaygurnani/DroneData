@@ -4,7 +4,7 @@ require(splines) #thx @Chase for the notice
 library(geosphere)
 
 # Read the data
-data <- read.csv(file="Azade5ms1sec.csv", header=TRUE, sep=",")
+data <- read.csv(file="updownSlow.csv", header=TRUE, sep=",")
 
 # Convert date column to Date object
 data$Date <- as.POSIXct(data$Date)
@@ -25,15 +25,15 @@ data.toPlot$Power <- as.double(-(data.toPlot$Current/1000) * data.toPlot$Voltage
 #Get Mangnitude of Velocity
 data.toPlot$Velocity <- sqrt(data.toPlot$VelocityX^2 + data.toPlot$VelocityY^2 + data.toPlot$VelocityZ^2)
 data.toPlot$Mean <- mean(data.toPlot$Power)
-
+data.toPlot$MaxWifi <- do.call(pmax, data.toPlot[10:17])
 
 ppi <- 200
-png(file=paste("5ms1secInterval", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
+png(file=paste("Hovering between 4 and 18 meters - Altitude", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
 
 #write.csv(data.toPlotFinal, file="FirstRev.csv")
 #par(mar=c(5.1, 4.1, 4.1, 8.1), xpd=TRUE)
-plot(y=data.toPlot$Velocity, x=data.toPlot$TimeDiffValue,type="l",col="black", lwd="1", ylab="Power (in Watts)", xlab="Time in Seconds",
-     main="Effect of velocity for 1 second interval - 5 m/s Initial speed")
+plot(y=data.toPlot$Altitude, x=data.toPlot$TimeDiffValue,type="l",col="black", lwd="1", ylab="Altitude (meters)", xlab="Time in Seconds",
+     main="Hovering between 4 and 18 meters - Altitude")
 #points(x=data.toPlot$TimeDiffValue[67], y=data.toPlot$Velocity[67], pch=1)
 #points(x=data.toPlot$TimeDiffValue[117], y=data.toPlot$Velocity[117], pch=2)
 #points(x=data.toPlot$TimeDiffValue[157], y=data.toPlot$Velocity[157], pch=3)
