@@ -3,6 +3,8 @@
   
   # Read the data
   data0 <- read.csv(file="0.csv", header=TRUE, sep=",")
+  data1 <- read.csv(file="1.csv", header=TRUE, sep=",")
+  data2 <- read.csv(file="2.csv", header=TRUE, sep=",")
   data3 <- read.csv(file="3.csv", header=TRUE, sep=",")
   data4 <- read.csv(file="4.csv", header=TRUE, sep=",")
   data5 <- read.csv(file="5.csv", header=TRUE, sep=",")
@@ -23,8 +25,28 @@
   data0.toPlot$TimeDiffValue <- as.numeric(data0.toPlot$TimeDiff)
   data0.toPlot$Power <- as.double(-(data0.toPlot$Current/1000) * data0.toPlot$Voltage/1000)
   data0.toPlot$Velocity <- sqrt(data0.toPlot$VelocityX^2 + data0.toPlot$VelocityY^2 + data0.toPlot$VelocityZ^2)
-  data0.toPlotFinal <- data0.toPlot[data0.toPlot$Velocity > -0.01 & data0.toPlot$TimeDiffValue < 0.01,]
+  data0.toPlotFinal <- data0.toPlot[data0.toPlot$Velocity > -0.01 & data0.toPlot$Velocity < 0.01,]
   data0.toPlotFinal$Mean <- mean(data0.toPlotFinal$Power)
+  
+  #1
+  data1$Date <- as.POSIXct(data1$Date)
+  data1.toPlot <- data1
+  data1.toPlot$TimeDiff <- data1.toPlot$Date - data1.toPlot$Date[1]
+  data1.toPlot$TimeDiffValue <- as.numeric(data1.toPlot$TimeDiff)
+  data1.toPlot$Power <- as.double(-(data1.toPlot$Current/1000) * data1.toPlot$Voltage/1000)
+  data1.toPlot$Velocity <- sqrt(data1.toPlot$VelocityX^2 + data1.toPlot$VelocityY^2 + data1.toPlot$VelocityZ^2)
+  data1.toPlotFinal <- data1.toPlot[data1.toPlot$Velocity > 0.9 & data1.toPlot$Velocity < 1.1,]
+  data1.toPlotFinal$Mean <- mean(data1.toPlotFinal$Power)
+  
+  #2
+  data2$Date <- as.POSIXct(data2$Date)
+  data2.toPlot <- data2
+  data2.toPlot$TimeDiff <- data2.toPlot$Date - data2.toPlot$Date[1]
+  data2.toPlot$TimeDiffValue <- as.numeric(data2.toPlot$TimeDiff)
+  data2.toPlot$Power <- as.double(-(data2.toPlot$Current/1000) * data2.toPlot$Voltage/1000)
+  data2.toPlot$Velocity <- sqrt(data2.toPlot$VelocityX^2 + data2.toPlot$VelocityY^2 + data2.toPlot$VelocityZ^2)
+  data2.toPlotFinal <- data2.toPlot[data2.toPlot$Velocity > 1.8 & data2.toPlot$Velocity < 2.2,]
+  data2.toPlotFinal$Mean <- mean(data2.toPlotFinal$Power)
   
   #3
   data3$Date <- as.POSIXct(data3$Date)
@@ -33,7 +55,7 @@
   data3.toPlot$TimeDiffValue <- as.numeric(data3.toPlot$TimeDiff)
   data3.toPlot$Power <- as.double(-(data3.toPlot$Current/1000) * data3.toPlot$Voltage/1000)
   data3.toPlot$Velocity <- sqrt(data3.toPlot$VelocityX^2 + data3.toPlot$VelocityY^2 + data3.toPlot$VelocityZ^2)
-  data3.toPlotFinal <- data3.toPlot[data3.toPlot$Velocity > 2.97 & data3.toPlot$Velocity < 3.03,]
+  data3.toPlotFinal <- data3.toPlot[data3.toPlot$Velocity > 2.7 & data3.toPlot$Velocity < 3.3,]
   data3.toPlotFinal$Mean <- mean(data3.toPlotFinal$Power)
   
   #4
@@ -43,7 +65,7 @@
   data4.toPlot$TimeDiffValue <- as.numeric(data4.toPlot$TimeDiff)
   data4.toPlot$Power <- as.double(-(data4.toPlot$Current/1000) * data4.toPlot$Voltage/1000)
   data4.toPlot$Velocity <- sqrt(data4.toPlot$VelocityX^2 + data4.toPlot$VelocityY^2 + data4.toPlot$VelocityZ^2)
-  data4.toPlotFinal <- data4.toPlot[data4.toPlot$Velocity > 3.96 & data4.toPlot$Velocity < 4.04,]
+  data4.toPlotFinal <- data4.toPlot[data4.toPlot$Velocity > 3.6 & data4.toPlot$Velocity < 4.4,]
   data4.toPlotFinal$Mean <- mean(data4.toPlotFinal$Power)
   
   #5
@@ -53,7 +75,7 @@
   data5.toPlot$TimeDiffValue <- as.numeric(data5.toPlot$TimeDiff)
   data5.toPlot$Power <- as.double(-(data5.toPlot$Current/1000) * data5.toPlot$Voltage/1000)
   data5.toPlot$Velocity <- sqrt(data5.toPlot$VelocityX^2 + data5.toPlot$VelocityY^2 + data5.toPlot$VelocityZ^2)
-  data5.toPlotFinal <- data5.toPlot[data5.toPlot$Velocity > 4.95 & data5.toPlot$Velocity < 5.05,]
+  data5.toPlotFinal <- data5.toPlot[data5.toPlot$Velocity > 4.5 & data5.toPlot$Velocity < 5.5,]
   data5.toPlotFinal$Mean <- mean(data5.toPlotFinal$Power)
   
   #6
@@ -63,7 +85,7 @@
   data6.toPlot$TimeDiffValue <- as.numeric(data6.toPlot$TimeDiff)
   data6.toPlot$Power <- as.double(-(data6.toPlot$Current/1000) * data6.toPlot$Voltage/1000)
   data6.toPlot$Velocity <- sqrt(data6.toPlot$VelocityX^2 + data6.toPlot$VelocityY^2 + data6.toPlot$VelocityZ^2)
-  data6.toPlotFinal <- data6.toPlot[data6.toPlot$Velocity > 5.94 & data6.toPlot$Velocity < 6.06,]
+  data6.toPlotFinal <- data6.toPlot[data6.toPlot$Velocity > 5.4 & data6.toPlot$Velocity < 6.6,]
   data6.toPlotFinal$Mean <- mean(data6.toPlotFinal$Power)
   
   #7
@@ -73,7 +95,7 @@
   data7.toPlot$TimeDiffValue <- as.numeric(data7.toPlot$TimeDiff)
   data7.toPlot$Power <- as.double(-(data7.toPlot$Current/1000) * data7.toPlot$Voltage/1000)
   data7.toPlot$Velocity <- sqrt(data7.toPlot$VelocityX^2 + data7.toPlot$VelocityY^2 + data7.toPlot$VelocityZ^2)
-  data7.toPlotFinal <- data7.toPlot[data7.toPlot$Velocity > 6.93 & data7.toPlot$Velocity < 7.07,]
+  data7.toPlotFinal <- data7.toPlot[data7.toPlot$Velocity > 6.3 & data7.toPlot$Velocity < 7.7,]
   data7.toPlotFinal$Mean <- mean(data7.toPlotFinal$Power)
   
   #8
@@ -83,7 +105,7 @@
   data8.toPlot$TimeDiffValue <- as.numeric(data8.toPlot$TimeDiff)
   data8.toPlot$Power <- as.double(-(data8.toPlot$Current/1000) * data8.toPlot$Voltage/1000)
   data8.toPlot$Velocity <- sqrt(data8.toPlot$VelocityX^2 + data8.toPlot$VelocityY^2 + data8.toPlot$VelocityZ^2)
-  data8.toPlotFinal <- data8.toPlot[data8.toPlot$Velocity > 7.92 & data8.toPlot$Velocity < 8.08 ,]
+  data8.toPlotFinal <- data8.toPlot[data8.toPlot$Velocity > 7.2 & data8.toPlot$Velocity < 8.8 ,]
   data8.toPlotFinal$Mean <- mean(data8.toPlotFinal$Power)
   
   #9
@@ -93,7 +115,7 @@
   data9.toPlot$TimeDiffValue <- as.numeric(data9.toPlot$TimeDiff)
   data9.toPlot$Power <- as.double(-(data9.toPlot$Current/1000) * data9.toPlot$Voltage/1000)
   data9.toPlot$Velocity <- sqrt(data9.toPlot$VelocityX^2 + data9.toPlot$VelocityY^2 + data9.toPlot$VelocityZ^2)
-  data9.toPlotFinal <- data9.toPlot[data9.toPlot$Velocity > 8.91 & data9.toPlot$Velocity < 9.09,]
+  data9.toPlotFinal <- data9.toPlot[data9.toPlot$Velocity > 8.1 & data9.toPlot$Velocity < 9.9,]
   data9.toPlotFinal$Mean <- mean(data9.toPlotFinal$Power)
   
   #10
@@ -103,7 +125,7 @@
   data10.toPlot$TimeDiffValue <- as.numeric(data10.toPlot$TimeDiff)
   data10.toPlot$Power <- as.double(-(data10.toPlot$Current/1000) * data10.toPlot$Voltage/1000)
   data10.toPlot$Velocity <- sqrt(data10.toPlot$VelocityX^2 + data10.toPlot$VelocityY^2 + data10.toPlot$VelocityZ^2)
-  data10.toPlotFinal <- data10.toPlot[data10.toPlot$Velocity > 9.90 & data10.toPlot$Velocity < 10.10,]
+  data10.toPlotFinal <- data10.toPlot[data10.toPlot$Velocity > 9 & data10.toPlot$Velocity < 11,]
   data10.toPlotFinal$Mean <- mean(data10.toPlotFinal$Power)
   
   #11
@@ -113,7 +135,7 @@
   data11.toPlot$TimeDiffValue <- as.numeric(data11.toPlot$TimeDiff)
   data11.toPlot$Power <- as.double(-(data11.toPlot$Current/1000) * data11.toPlot$Voltage/1000)
   data11.toPlot$Velocity <- sqrt(data11.toPlot$VelocityX^2 + data11.toPlot$VelocityY^2 + data11.toPlot$VelocityZ^2)
-  data11.toPlotFinal <- data11.toPlot[data11.toPlot$Velocity > 10.89 & data11.toPlot$Velocity < 11.11,]
+  data11.toPlotFinal <- data11.toPlot[data11.toPlot$Velocity > 9.9 & data11.toPlot$Velocity < 12.1,]
   data11.toPlotFinal$Mean <- mean(data11.toPlotFinal$Power)
   
   #12
@@ -123,7 +145,7 @@
   data12.toPlot$TimeDiffValue <- as.numeric(data12.toPlot$TimeDiff)
   data12.toPlot$Power <- as.double(-(data12.toPlot$Current/1000) * data12.toPlot$Voltage/1000)
   data12.toPlot$Velocity <- sqrt(data12.toPlot$VelocityX^2 + data12.toPlot$VelocityY^2 + data12.toPlot$VelocityZ^2)
-  data12.toPlotFinal <- data12.toPlot[data12.toPlot$Velocity > 11.88 & data12.toPlot$Velocity < 12.12,]
+  data12.toPlotFinal <- data12.toPlot[data12.toPlot$Velocity > 10.8 & data12.toPlot$Velocity < 13.2,]
   data12.toPlotFinal$Mean <- mean(data12.toPlotFinal$Power)
   
   #13
@@ -133,7 +155,7 @@
   data13.toPlot$TimeDiffValue <- as.numeric(data13.toPlot$TimeDiff)
   data13.toPlot$Power <- as.double(-(data13.toPlot$Current/1000) * data13.toPlot$Voltage/1000)
   data13.toPlot$Velocity <- sqrt(data13.toPlot$VelocityX^2 + data13.toPlot$VelocityY^2 + data13.toPlot$VelocityZ^2)
-  data13.toPlotFinal <- data13.toPlot[data13.toPlot$Velocity > 12.87 & data13.toPlot$Velocity < 13.13,]
+  data13.toPlotFinal <- data13.toPlot[data13.toPlot$Velocity > 11.7 & data13.toPlot$Velocity < 14.3,]
   data13.toPlotFinal$Mean <- mean(data13.toPlotFinal$Power)
   
   #14
@@ -147,15 +169,18 @@
   data14.toPlotFinal$Mean <- mean(data14.toPlotFinal$Power)
   
   # Extract the data from column name to plot
-  data.toPlot <- rbind(data0.toPlotFinal, data3.toPlotFinal, data4.toPlotFinal, data5.toPlotFinal, data6.toPlotFinal, data7.toPlotFinal, data8.toPlotFinal, data9.toPlotFinal, data10.toPlotFinal, data11.toPlotFinal, data12.toPlotFinal, data13.toPlotFinal, data14.toPlotFinal)
+  data.toPlot <- rbind(data1.toPlotFinal, data2.toPlotFinal, data3.toPlotFinal, data4.toPlotFinal, data5.toPlotFinal, 
+                       data6.toPlotFinal, data7.toPlotFinal, 
+                       data8.toPlotFinal, data9.toPlotFinal, data10.toPlotFinal,
+                       data11.toPlotFinal, data12.toPlotFinal, data13.toPlotFinal)
   
   
   #write.csv(data.toPlotFinal, file="toPlotFinal")
   ppi <- 200
-  png(file=paste("10 Meters Power Speed Box Plot", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
+  #png(file=paste("10 Meters Power Speed Box Plot", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
   
   #Final
-  boxplot(data.toPlot$Power~data.toPlot$VelocitySolid,data=data.toPlot, ylim=c(110, 220),
+  boxplot(data.toPlot$Mean~data.toPlot$VelocitySolid,data=data.toPlot, ylim=c(130, 180),
           main="Power vs Speed, Box Plot - 10 meters height", xlab="Velocity (m/s)", ylab="Power (Watts)")
   
-  dev.off()
+  #dev.off()
