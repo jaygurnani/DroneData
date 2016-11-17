@@ -4,7 +4,7 @@ require(splines) #thx @Chase for the notice
 library(geosphere)
 
 # Read the data
-data <- read.csv(file="yawUnknown-2.csv", header=TRUE, sep=",")
+data <- read.csv(file="1-all.csv", header=TRUE, sep=",")
 
 # Convert date column to Date object
 data$Date <- as.POSIXct(data$Date)
@@ -28,11 +28,11 @@ data.toPlot$Mean <- mean(data.toPlot$Power)
 data.toPlot$MaxWifi <- do.call(pmax, data.toPlot[10:17])
 
 ppi <- 200
-png(file=paste("Yawing Power consumption approx 140 Experiment 2", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
+#png(file=paste("Yawing Power consumption approx 140 Experiment 2", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
 
 #write.csv(data.toPlotFinal, file="FirstRev.csv")
 #par(mar=c(5.1, 4.1, 4.1, 8.1), xpd=TRUE)
-plot(y=data.toPlot$Power, x=data.toPlot$TimeDiffValue,type="l",col="black", lwd="1", ylab="Power (Watts) ", xlab="Time in Seconds",
+plot(y=data.toPlot$Velocity, x=data.toPlot$TimeDiffValue,type="l",col="black", lwd="1", ylab="Power (Watts) ", xlab="Time in Seconds",
      main="Yawing Power consumption approx 140 degree/second Experiment 2")
 #points(x=data.toPlot$TimeDiffValue[67], y=data.toPlot$Velocity[67], pch=1)
 #points(x=data.toPlot$TimeDiffValue[117], y=data.toPlot$Velocity[117], pch=2)
@@ -48,4 +48,4 @@ plot(y=data.toPlot$Power, x=data.toPlot$TimeDiffValue,type="l",col="black", lwd=
 #                           "1s interval", "0.75s interval", "0.5s interval", "0.25s interval", 
 #                           "0.1s interval"), bty="n", pch=1:9, lty=1, lwd=1)
 
-dev.off()
+#dev.off()

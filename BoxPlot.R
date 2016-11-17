@@ -2,21 +2,21 @@
   setwd("/Users/mac/Desktop/Programming/COMP9596//DroneData")
   
   # Read the data
-  data0 <- read.csv(file="0.csv", header=TRUE, sep=",")
-  data1 <- read.csv(file="1.csv", header=TRUE, sep=",")
-  data2 <- read.csv(file="2.csv", header=TRUE, sep=",")
-  data3 <- read.csv(file="3.csv", header=TRUE, sep=",")
-  data4 <- read.csv(file="4.csv", header=TRUE, sep=",")
-  data5 <- read.csv(file="5.csv", header=TRUE, sep=",")
-  data6 <- read.csv(file="6.csv", header=TRUE, sep=",")
-  data7 <- read.csv(file="7.csv", header=TRUE, sep=",")
-  data8 <- read.csv(file="8.csv", header=TRUE, sep=",")
-  data9 <- read.csv(file="9.csv", header=TRUE, sep=",")
-  data10 <- read.csv(file="10.csv", header=TRUE, sep=",")
-  data11 <- read.csv(file="11.csv", header=TRUE, sep=",")
-  data12 <- read.csv(file="12.csv", header=TRUE, sep=",")
-  data13 <- read.csv(file="13.csv", header=TRUE, sep=",")
-  data14 <- read.csv(file="14.csv", header=TRUE, sep=",")
+  data0 <- read.csv(file="0-all.csv", header=TRUE, sep=",")
+  data1 <- read.csv(file="1-all.csv", header=TRUE, sep=",")
+  data2 <- read.csv(file="2-all.csv", header=TRUE, sep=",")
+  data3 <- read.csv(file="3-all.csv", header=TRUE, sep=",")
+  data4 <- read.csv(file="4-all.csv", header=TRUE, sep=",")
+  data5 <- read.csv(file="5-all.csv", header=TRUE, sep=",")
+  data6 <- read.csv(file="6-all.csv", header=TRUE, sep=",")
+  data7 <- read.csv(file="7-all.csv", header=TRUE, sep=",")
+  data8 <- read.csv(file="8-all.csv", header=TRUE, sep=",")
+  data9 <- read.csv(file="9-all.csv", header=TRUE, sep=",")
+  data10 <- read.csv(file="10-all.csv", header=TRUE, sep=",")
+  data11 <- read.csv(file="11-all.csv", header=TRUE, sep=",")
+  data12 <- read.csv(file="12-all.csv", header=TRUE, sep=",")
+  data13 <- read.csv(file="13-all.csv", header=TRUE, sep=",")
+  data14 <- read.csv(file="14-all.csv", header=TRUE, sep=",")
   
   #0
   data0$Date <- as.POSIXct(data0$Date)
@@ -177,10 +177,10 @@
   
   #write.csv(data.toPlotFinal, file="toPlotFinal")
   ppi <- 200
-  png(file=paste("20 Meters Power Speed Box Plot", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
+  png(file=paste("10 Meters Power Speed Box Plot, All Experiements", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
   
   #Final
-  boxplot(data.toPlot$Power~data.toPlot$VelocitySolid,data=data.toPlot, #ylim=c(90, 270),
-          main="Power vs Speed, Box Plot - 20 meters height", xlab="Velocity (m/s)", ylab="Power (Watts)")
+  boxplot(data.toPlot$Power~data.toPlot$VelocitySolid,data=data.toPlot, ylim=c(90, 290),
+          main="Power vs Speed, Box Plot - 10 meters height, All Experiements", xlab="Velocity (m/s)", ylab="Power (Watts)")
   
   dev.off()
