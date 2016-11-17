@@ -169,18 +169,18 @@
   data14.toPlotFinal$Mean <- mean(data14.toPlotFinal$Power)
   
   # Extract the data from column name to plot
-  data.toPlot <- rbind(data1.toPlotFinal, data2.toPlotFinal, data3.toPlotFinal, data4.toPlotFinal, data5.toPlotFinal, 
+  data.toPlot <- rbind(data0.toPlotFinal, data1.toPlotFinal, data2.toPlotFinal, data3.toPlotFinal, data4.toPlotFinal, data5.toPlotFinal, 
                        data6.toPlotFinal, data7.toPlotFinal, 
                        data8.toPlotFinal, data9.toPlotFinal, data10.toPlotFinal,
-                       data11.toPlotFinal, data12.toPlotFinal, data13.toPlotFinal)
+                       data11.toPlotFinal, data12.toPlotFinal, data13.toPlotFinal, data14.toPlotFinal)
   
   
   #write.csv(data.toPlotFinal, file="toPlotFinal")
   ppi <- 200
-  #png(file=paste("10 Meters Power Speed Box Plot", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
+  png(file=paste("20 Meters Power Speed Box Plot", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
   
   #Final
-  boxplot(data.toPlot$Mean~data.toPlot$VelocitySolid,data=data.toPlot, ylim=c(130, 180),
-          main="Power vs Speed, Box Plot - 10 meters height", xlab="Velocity (m/s)", ylab="Power (Watts)")
+  boxplot(data.toPlot$Power~data.toPlot$VelocitySolid,data=data.toPlot, #ylim=c(90, 270),
+          main="Power vs Speed, Box Plot - 20 meters height", xlab="Velocity (m/s)", ylab="Power (Watts)")
   
-  #dev.off()
+  dev.off()
