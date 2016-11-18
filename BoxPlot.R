@@ -2,7 +2,7 @@
   setwd("/Users/mac/Desktop/Programming/COMP9596//DroneData")
   
   # Read the data
-  data0 <- read.csv(file="0-all.csv", header=TRUE, sep=",")
+  data0 <- read.csv(file="0-all-extrapolated.csv", header=TRUE, sep=",")
   data1 <- read.csv(file="1-all.csv", header=TRUE, sep=",")
   data2 <- read.csv(file="2-all.csv", header=TRUE, sep=",")
   data3 <- read.csv(file="3-all.csv", header=TRUE, sep=",")
@@ -27,6 +27,7 @@
   data0.toPlot$Velocity <- sqrt(data0.toPlot$VelocityX^2 + data0.toPlot$VelocityY^2 + data0.toPlot$VelocityZ^2)
   data0.toPlotFinal <- data0.toPlot[data0.toPlot$Velocity > -0.01 & data0.toPlot$Velocity < 0.01,]
   data0.toPlotFinal$Mean <- mean(data0.toPlotFinal$Power)
+  data0.toPlotFinal$MeanVelocity <- mean(data0.toPlotFinal$Velocity)
   
   #1
   data1$Date <- as.POSIXct(data1$Date)
@@ -37,6 +38,7 @@
   data1.toPlot$Velocity <- sqrt(data1.toPlot$VelocityX^2 + data1.toPlot$VelocityY^2 + data1.toPlot$VelocityZ^2)
   data1.toPlotFinal <- data1.toPlot[data1.toPlot$Velocity > 0.9 & data1.toPlot$Velocity < 1.1,]
   data1.toPlotFinal$Mean <- mean(data1.toPlotFinal$Power)
+  data1.toPlotFinal$MeanVelocity <- mean(data1.toPlotFinal$Velocity)
   
   #2
   data2$Date <- as.POSIXct(data2$Date)
@@ -47,6 +49,7 @@
   data2.toPlot$Velocity <- sqrt(data2.toPlot$VelocityX^2 + data2.toPlot$VelocityY^2 + data2.toPlot$VelocityZ^2)
   data2.toPlotFinal <- data2.toPlot[data2.toPlot$Velocity > 1.8 & data2.toPlot$Velocity < 2.2,]
   data2.toPlotFinal$Mean <- mean(data2.toPlotFinal$Power)
+  data2.toPlotFinal$MeanVelocity <- mean(data2.toPlotFinal$Velocity)
   
   #3
   data3$Date <- as.POSIXct(data3$Date)
@@ -57,6 +60,7 @@
   data3.toPlot$Velocity <- sqrt(data3.toPlot$VelocityX^2 + data3.toPlot$VelocityY^2 + data3.toPlot$VelocityZ^2)
   data3.toPlotFinal <- data3.toPlot[data3.toPlot$Velocity > 2.7 & data3.toPlot$Velocity < 3.3,]
   data3.toPlotFinal$Mean <- mean(data3.toPlotFinal$Power)
+  data3.toPlotFinal$MeanVelocity <- mean(data3.toPlotFinal$Velocity)
   
   #4
   data4$Date <- as.POSIXct(data4$Date)
@@ -67,6 +71,7 @@
   data4.toPlot$Velocity <- sqrt(data4.toPlot$VelocityX^2 + data4.toPlot$VelocityY^2 + data4.toPlot$VelocityZ^2)
   data4.toPlotFinal <- data4.toPlot[data4.toPlot$Velocity > 3.6 & data4.toPlot$Velocity < 4.4,]
   data4.toPlotFinal$Mean <- mean(data4.toPlotFinal$Power)
+  data4.toPlotFinal$MeanVelocity <- mean(data4.toPlotFinal$Velocity)
   
   #5
   data5$Date <- as.POSIXct(data5$Date)
@@ -77,6 +82,7 @@
   data5.toPlot$Velocity <- sqrt(data5.toPlot$VelocityX^2 + data5.toPlot$VelocityY^2 + data5.toPlot$VelocityZ^2)
   data5.toPlotFinal <- data5.toPlot[data5.toPlot$Velocity > 4.5 & data5.toPlot$Velocity < 5.5,]
   data5.toPlotFinal$Mean <- mean(data5.toPlotFinal$Power)
+  data5.toPlotFinal$MeanVelocity <- mean(data5.toPlotFinal$Velocity)
   
   #6
   data6$Date <- as.POSIXct(data6$Date)
@@ -87,6 +93,7 @@
   data6.toPlot$Velocity <- sqrt(data6.toPlot$VelocityX^2 + data6.toPlot$VelocityY^2 + data6.toPlot$VelocityZ^2)
   data6.toPlotFinal <- data6.toPlot[data6.toPlot$Velocity > 5.4 & data6.toPlot$Velocity < 6.6,]
   data6.toPlotFinal$Mean <- mean(data6.toPlotFinal$Power)
+  data6.toPlotFinal$MeanVelocity <- mean(data6.toPlotFinal$Velocity)
   
   #7
   data7$Date <- as.POSIXct(data7$Date)
@@ -97,6 +104,7 @@
   data7.toPlot$Velocity <- sqrt(data7.toPlot$VelocityX^2 + data7.toPlot$VelocityY^2 + data7.toPlot$VelocityZ^2)
   data7.toPlotFinal <- data7.toPlot[data7.toPlot$Velocity > 6.3 & data7.toPlot$Velocity < 7.7,]
   data7.toPlotFinal$Mean <- mean(data7.toPlotFinal$Power)
+  data7.toPlotFinal$MeanVelocity <- mean(data7.toPlotFinal$Velocity)
   
   #8
   data8$Date <- as.POSIXct(data8$Date)
@@ -107,6 +115,7 @@
   data8.toPlot$Velocity <- sqrt(data8.toPlot$VelocityX^2 + data8.toPlot$VelocityY^2 + data8.toPlot$VelocityZ^2)
   data8.toPlotFinal <- data8.toPlot[data8.toPlot$Velocity > 7.2 & data8.toPlot$Velocity < 8.8 ,]
   data8.toPlotFinal$Mean <- mean(data8.toPlotFinal$Power)
+  data8.toPlotFinal$MeanVelocity <- mean(data8.toPlotFinal$Velocity)
   
   #9
   data9$Date <- as.POSIXct(data9$Date)
@@ -117,6 +126,7 @@
   data9.toPlot$Velocity <- sqrt(data9.toPlot$VelocityX^2 + data9.toPlot$VelocityY^2 + data9.toPlot$VelocityZ^2)
   data9.toPlotFinal <- data9.toPlot[data9.toPlot$Velocity > 8.1 & data9.toPlot$Velocity < 9.9,]
   data9.toPlotFinal$Mean <- mean(data9.toPlotFinal$Power)
+  data9.toPlotFinal$MeanVelocity <- mean(data9.toPlotFinal$Velocity)
   
   #10
   data10$Date <- as.POSIXct(data10$Date)
@@ -127,6 +137,7 @@
   data10.toPlot$Velocity <- sqrt(data10.toPlot$VelocityX^2 + data10.toPlot$VelocityY^2 + data10.toPlot$VelocityZ^2)
   data10.toPlotFinal <- data10.toPlot[data10.toPlot$Velocity > 9 & data10.toPlot$Velocity < 11,]
   data10.toPlotFinal$Mean <- mean(data10.toPlotFinal$Power)
+  data10.toPlotFinal$MeanVelocity <- mean(data10.toPlotFinal$Velocity)
   
   #11
   data11$Date <- as.POSIXct(data11$Date)
@@ -137,6 +148,7 @@
   data11.toPlot$Velocity <- sqrt(data11.toPlot$VelocityX^2 + data11.toPlot$VelocityY^2 + data11.toPlot$VelocityZ^2)
   data11.toPlotFinal <- data11.toPlot[data11.toPlot$Velocity > 9.9 & data11.toPlot$Velocity < 12.1,]
   data11.toPlotFinal$Mean <- mean(data11.toPlotFinal$Power)
+  data11.toPlotFinal$MeanVelocity <- mean(data11.toPlotFinal$Velocity)
   
   #12
   data12$Date <- as.POSIXct(data12$Date)
@@ -147,6 +159,7 @@
   data12.toPlot$Velocity <- sqrt(data12.toPlot$VelocityX^2 + data12.toPlot$VelocityY^2 + data12.toPlot$VelocityZ^2)
   data12.toPlotFinal <- data12.toPlot[data12.toPlot$Velocity > 10.8 & data12.toPlot$Velocity < 13.2,]
   data12.toPlotFinal$Mean <- mean(data12.toPlotFinal$Power)
+  data12.toPlotFinal$MeanVelocity <- mean(data12.toPlotFinal$Velocity)
   
   #13
   data13$Date <- as.POSIXct(data13$Date)
@@ -157,6 +170,7 @@
   data13.toPlot$Velocity <- sqrt(data13.toPlot$VelocityX^2 + data13.toPlot$VelocityY^2 + data13.toPlot$VelocityZ^2)
   data13.toPlotFinal <- data13.toPlot[data13.toPlot$Velocity > 11.7 & data13.toPlot$Velocity < 14.3,]
   data13.toPlotFinal$Mean <- mean(data13.toPlotFinal$Power)
+  data13.toPlotFinal$MeanVelocity <- mean(data13.toPlotFinal$Velocity)
   
   #14
   data14$Date <- as.POSIXct(data14$Date)
@@ -167,6 +181,7 @@
   data14.toPlot$Velocity <- sqrt(data14.toPlot$VelocityX^2 + data14.toPlot$VelocityY^2 + data14.toPlot$VelocityZ^2)
   data14.toPlotFinal <- data14.toPlot[data14.toPlot$Velocity > 13.86 & data14.toPlot$Velocity < 14.14,]
   data14.toPlotFinal$Mean <- mean(data14.toPlotFinal$Power)
+  data14.toPlotFinal$MeanVelocity <- mean(data14.toPlotFinal$Velocity)
   
   # Extract the data from column name to plot
   data.toPlot <- rbind(data0.toPlotFinal, data1.toPlotFinal, data2.toPlotFinal, data3.toPlotFinal, data4.toPlotFinal, data5.toPlotFinal, 
@@ -177,10 +192,12 @@
   
   #write.csv(data.toPlotFinal, file="toPlotFinal")
   ppi <- 200
-  png(file=paste("10 Meters Power Speed Box Plot, All Experiements", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
+  png(file=paste("10 Meters Power Speed Mean, All Experiements Test", ".png", sep=""), height=9*ppi, width=11*ppi, res=ppi)
   
   #Final
-  boxplot(data.toPlot$Power~data.toPlot$VelocitySolid,data=data.toPlot, ylim=c(90, 290),
-          main="Power vs Speed, Box Plot - 10 meters height, All Experiements", xlab="Velocity (m/s)", ylab="Power (Watts)")
-  
+ plot(data.toPlot$Mean~round(data.toPlot$MeanVelocity,2) ,data=data.toPlot,
+          #ylim=c(90, 290),
+          main="Power vs Speed, Mean - 10 meters height, All Experiements", xlab="Velocity (m/s)", ylab="Power (Watts)",
+          xaxt='n')
+ axis(1, at=round(data.toPlot$MeanVelocity, 2),labels=round(data.toPlot$MeanVelocity, 2), col.axis="black", las=0)
   dev.off()
