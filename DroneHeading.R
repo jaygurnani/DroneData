@@ -70,7 +70,7 @@ r8 = max(t8) - min(t8)
 #dX <- rowMeans(embed(data.toPlot$TimeDiffValue,2)) # centers the X values for plotting
 
 ppi <- 200
-png(file=paste("10MsAngles", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
+#png(file=paste("10MsAngles", ".png", sep=""), height=7*ppi, width=9*ppi, res=ppi)
 
 #write.csv(data.toPlotFinal, file="FirstRev.csv")
 y2 = c(r1, r2, r3, r4, r5, r6, r7, r8)
@@ -83,4 +83,12 @@ abline(a=20, b=0, lty =3)
 
 legend("topleft", legend=c("Angle instructed to turn"), bty="n", lty=3, lwd=1)
 
-dev.off()
+#dev.off()
+print(r1)
+print(r2)
+print(r3)
+print(r4)
+print(r5)
+print(r6)
+print(r7)
+print(r8)
